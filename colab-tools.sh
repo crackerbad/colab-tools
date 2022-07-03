@@ -17,6 +17,7 @@ pip install pycryptodome
 
 #google drive downloader
 pip install gdown
+pip install --upgrade gdown
 
 #ffmpeg
 sudo apt-get install ffmpeg -y
