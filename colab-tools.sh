@@ -5,6 +5,9 @@ sudo apt-get update
 npm install -g npm
 npm i torrent -g
 
+#transmission
+sudo apt-get install transmission-cli -y
+
 #Croc Send files
 curl https://getcroc.schollz.com | bash
 
