@@ -6,10 +6,10 @@ sudo apt-get update
 #npm i torrent -g
 
 #transmission
-#sudo apt-get install transmission-cli -y
+sudo apt-get install transmission-cli -y
 
 #odrive
-gitclone https://github.com/crackerbad/odrive
+git clone https://github.com/crackerbad/odrive
 pip3 install -r odrive/requirements.txt
 pip3 install selenium
 pip3 install webdriver_manager
