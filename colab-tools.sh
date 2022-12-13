@@ -2,11 +2,17 @@
 sudo apt-get update
 
 #npm torrent client
-npm install -g npm
-npm i torrent -g
+#npm install -g npm
+#npm i torrent -g
 
 #transmission
-sudo apt-get install transmission-cli -y
+#sudo apt-get install transmission-cli -y
+
+#odrive
+gitclone https://github.com/crackerbad/odrive
+pip3 install -r odrive/requirements.txt
+pip3 install selenium
+pip3 install webdriver-manager
 
 #Croc Send files
 curl https://getcroc.schollz.com | bash
