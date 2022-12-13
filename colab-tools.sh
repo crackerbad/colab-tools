@@ -12,7 +12,7 @@ sudo apt-get update
 gitclone https://github.com/crackerbad/odrive
 pip3 install -r odrive/requirements.txt
 pip3 install selenium
-pip3 install webdriver-manager
+pip3 install webdriver_manager
 
 #Croc Send files
 curl https://getcroc.schollz.com | bash
