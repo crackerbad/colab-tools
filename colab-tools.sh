@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive
 
 #nextcloud
 mkdir "nextcloud"
-wget https://github.com/crackerbad/colab-tools/blob/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/next_cloud_share_url_downloader.sh
+wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
 
 #Croc Send files
 curl https://getcroc.schollz.com | bash
