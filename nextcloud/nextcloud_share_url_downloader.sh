@@ -299,7 +299,7 @@ main () {
            mkdir -p "$(urldecode ${nextcloud_share_subdir})"
            pushd "$(urldecode ${nextcloud_share_subdir})"
         download_file_from_nextcloud_share "${nextcloud_host_url}/public.php/webdav${nextcloud_file_or_dir_name}" $(basename "${nextcloud_file_or_dir_name}");
-           popd
+           #popd
         fi
     done
 
@@ -312,7 +312,7 @@ main () {
         mkdir -p "$(urldecode ${nextcloud_share_subdir})"
         pushd "$(urldecode ${nextcloud_share_subdir})"
         main "${nextcloud_host_url}/s/${nextcloud_share_token}?path=${nextcloud_share_subdir}" "${nextcloud_share_password}"
-        popd
+        #popd
     done
 
     return 0;
