@@ -31,6 +31,9 @@
 urldecode () {
     echo $(printf $(echo -n "$1" | sed 's/\\/\\\\/g;s/\(%\)\([0-9a-fA-F][0-9a-fA-F]\)/\\x\2/g')"")
 }
+fixfolder () {
+    echo $(printf $(echo -n "$1" | sed 's|/||g;s/\\/\\\\/g;s/\(%\)\([0-9a-fA-F][0-9a-fA-F]\)/\\x\2/g' )"")
+}
 
 usage () {
     printf '\nUsage:    %s <nextcloud_share_url>\n' "${0}";
@@ -296,10 +299,10 @@ main () {
             nextcloud_share_list_selected_subdirs+=("${nextcloud_file_or_dir_name}");
         else
         # Download file from NextCloud share.
-           #mkdir -p "$(urldecode ${nextcloud_share_subdir})"
-           #pushd "$(urldecode ${nextcloud_share_subdir})"
+           mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
+           pushd "$(fixfolder ${nextcloud_share_subdir})"
         download_file_from_nextcloud_share "${nextcloud_host_url}/public.php/webdav${nextcloud_file_or_dir_name}" $(basename "${nextcloud_file_or_dir_name}");
-           #popd
+           popd
         fi
     done
 
@@ -309,10 +312,10 @@ main () {
         nextcloud_share_subdir="${nextcloud_share_list_selected_subdir}";
 
         # List content of NextCloud share subdir.
-        #mkdir -p "$(urldecode ${nextcloud_share_subdir})"
-        #pushd "$(urldecode ${nextcloud_share_subdir})"
+        mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
+        pushd "$(fixfolder ${nextcloud_share_subdir})"
         main "${nextcloud_host_url}/s/${nextcloud_share_token}?path=${nextcloud_share_subdir}" "${nextcloud_share_password}"
-        #popd
+        popd
     done
 
     return 0;
