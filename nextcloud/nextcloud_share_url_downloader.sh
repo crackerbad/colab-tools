@@ -268,6 +268,13 @@ main () {
     #   - NextCloud share token:  "${nextcloud_share_token}"
     #   - NextCloud share subdir:  "${nextcloud_share_subdir}"
     parse_nextcloud_share_url "${nextcloud_share_url}" || return 1;
+    #extrair nome da pasta da pagina
+    wget $nextcloud_share_url -O /temp.html
+    foldername=$(sed -n '/filename/p' /temp.html |  sed -e 's/\"//g;s/<input type=hidden name=filename value=//g;s/ id=filename>//g')
+    rm /temp.html
+    mkdir "$foldername"
+    cd "$foldername"
+    clear
 
     # List content of NextCloud subdir "${nextcloud_share_subdir}" share URL ("${nextcloud_share_url}").
     # The results are stored in "${nextcloud_dir_listing_array[@]}".
@@ -299,10 +306,10 @@ main () {
             nextcloud_share_list_selected_subdirs+=("${nextcloud_file_or_dir_name}");
         else
         # Download file from NextCloud share.
-           mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
-           pushd "$(fixfolder ${nextcloud_share_subdir})"
+           #mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
+          # pushd "$(fixfolder ${nextcloud_share_subdir})"
         download_file_from_nextcloud_share "${nextcloud_host_url}/public.php/webdav${nextcloud_file_or_dir_name}" $(basename "${nextcloud_file_or_dir_name}");
-           popd
+         #  popd
         fi
     done
 
@@ -312,10 +319,10 @@ main () {
         nextcloud_share_subdir="${nextcloud_share_list_selected_subdir}";
 
         # List content of NextCloud share subdir.
-        mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
-        pushd "$(fixfolder ${nextcloud_share_subdir})"
+        #mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
+        #pushd "$(fixfolder ${nextcloud_share_subdir})"
         main "${nextcloud_host_url}/s/${nextcloud_share_token}?path=${nextcloud_share_subdir}" "${nextcloud_share_password}"
-        popd
+        #popd
     done
 
     return 0;
