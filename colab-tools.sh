@@ -1,13 +1,6 @@
 #!/bin/sh
 sudo apt-get update
 
-#npm torrent client
-#npm install -g npm
-#npm i torrent -g
-
-#transmission
-sudo apt-get install transmission-cli -y
-
 #odrive
 git clone https://github.com/crackerbad/odrive
 pip3 install -r odrive/requirements.txt
@@ -15,10 +8,10 @@ pip3 install selenium
 pip3 install webdriver_manager
 wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
 
-#nextcloud
+#nextcloud e google index downloader
 mkdir "nextcloud"
 wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
-wget https://github.com/crackerbad/colab-tools/raw/main/nextcloud/Index-downloader.py -O nextcloud/index-downloader.py
+wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/index-downloader.py -O nextcloud/index-downloader.py
 
 #Croc Send files
 curl https://getcroc.schollz.com | bash
@@ -26,6 +19,8 @@ curl https://getcroc.schollz.com | bash
 #youtube-dlp
 sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
 sudo chmod a+rx /usr/local/bin/yt-dlp
+
+#rename for rename files
 sudo apt-get install rename
 
 #cryptodome for decrypt streams
