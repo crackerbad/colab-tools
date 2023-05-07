@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo apt-get -y update
+sudo apt-get update
 mkdir "tools"
 
 INSTALL_CRDOWNLOADER(){
@@ -31,8 +31,6 @@ INSTALL_DOWNLOADERS(){
 	mkdir "nextcloud"
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
-	#aria2c
-	sudo apt-get install aria2 -y
 	cd ..
 }
 
@@ -52,6 +50,8 @@ INSTALL_YTDLP(){
 }
 
 INSTALL_TOOLS(){
+	#aria2c
+	sudo apt-get install aria2 -y
 	#ffmpeg
 	sudo apt-get install ffmpeg -y
 	#rename for rename files
