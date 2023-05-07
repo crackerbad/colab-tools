@@ -30,7 +30,7 @@ INSTALL_DOWNLOADERS(){
 	#nextcloud e google index downloader
 	mkdir "nextcloud"
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
-	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/index-downloader.py -O nextcloud/index-downloader.py
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
 	#aria2c
 	sudo apt-get install aria2 -y
 	cd ..
