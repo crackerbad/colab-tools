@@ -9,8 +9,8 @@ INSTALL_CRDOWNLOADER(){
 	rm multi-downloader-nx-ubuntu-gui.7z
 	cd "/content/tools/cr-downloader"
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
-	rm config.zip
 	unzip config.zip
+	rm config.zip
 	cd -
 }
 
