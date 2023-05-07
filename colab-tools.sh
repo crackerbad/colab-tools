@@ -53,6 +53,7 @@ INSTALL_CLOUDFLARED() {
 	#cloudflare argo
     wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/download/2023.4.2/cloudflared-fips-linux-amd64
     chmod +x /usr/bin/argo
+    mkdir /workdir/
     wget https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh -O /workdir/cloudflared.sh
 }
 
