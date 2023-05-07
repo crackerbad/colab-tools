@@ -14,7 +14,7 @@ wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nex
 wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/index-downloader.py -O nextcloud/index-downloader.py
 
 #Croc Send files
-curl https://getcroc.schollz.com | bash
+#curl https://getcroc.schollz.com | bash
 
 #youtube-dlp
 sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp
@@ -27,7 +27,7 @@ sudo apt-get install rename
 pip install pycryptodome
 
 #google drive downloader
-pip install gdown
+#pip install gdown
 pip install --upgrade gdown
 
 #ffmpeg
@@ -47,7 +47,6 @@ cd cr-downloader
 wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
 unzip config.zip
 cd ..
-./cr-downloader/aniDL &
 
 echo Instalação Finalizada
 
