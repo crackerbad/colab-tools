@@ -42,10 +42,12 @@ INSTALL_YTDLP(){
 
 INSTALL_CRDOWNLOADER(){
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
+	rm multi-downloader-nx-ubuntu-gui.7z
 	mkdir "tools/cr-downloader"
 	7z e -y "multi-downloader-nx-ubuntu-gui.7z" -o/content/tools/cr-downloader/
 	cd "tools/cr-downloader"
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
+	rm config.zip
 	unzip config.zip
 	cd -
 }
@@ -54,7 +56,7 @@ INSTALL_CLOUDFLARED() {
 	#cloudflare argo
     wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/download/2023.4.2/cloudflared-fips-linux-amd64
     chmod +x /usr/bin/argo
-    wget https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh -O /tools/cloudflared.sh
+    wget "https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh" -O "/content/tools/cloudflared.sh"
 }
 
 INSTALL_ODRIVE &
