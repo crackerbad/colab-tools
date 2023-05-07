@@ -1,5 +1,6 @@
 #!/bin/sh
 sudo apt-get update
+mkdir tools
 
 INSTALL_ODRIVE(){
 	git clone https://github.com/crackerbad/odrive
