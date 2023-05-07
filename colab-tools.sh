@@ -1,51 +1,13 @@
 #!/bin/sh
-sudo apt-get update
+sudo apt-get -y update
 mkdir "tools"
-
-INSTALL_ODRIVE(){
-	git clone https://github.com/crackerbad/odrive
-	pip3 install -r odrive/requirements.txt
-	pip3 install selenium
-	pip3 install webdriver_manager
-	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
-}
-
-INSTALL_DOWNLOADERS(){
-	#google drive downloader
-	pip install --upgrade gdown
-	#cryptodome for decrypt streams
-	pip install pycryptodome
-	#nextcloud e google index downloader
-	mkdir "nextcloud"
-	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
-	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/index-downloader.py -O nextcloud/index-downloader.py
-	#aria2c
-	sudo apt-get install aria2 -y
-}
-
-INSTALL_TOOLS(){
-	#ffmpeg
-	sudo apt-get install ffmpeg -y
-	#rename for rename files
-	sudo apt-get install rename
-	#mkvtoolnix
-	sudo apt-get install mkvtoolnix -y
-	#Croc Send files
-	#curl https://getcroc.schollz.com | bash
-}
-
-INSTALL_YTDLP(){
-    wget -qO /usr/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
-    chmod +x /usr/bin/yt-dlp
-}
-
 
 INSTALL_CRDOWNLOADER(){
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
 	rm multi-downloader-nx-ubuntu-gui.7z
-	mkdir "tools/cr-downloader"
+	mkdir "/content/tools/cr-downloader"
 	7z e -y "multi-downloader-nx-ubuntu-gui.7z" -o/content/tools/cr-downloader/
-	cd "tools/cr-downloader"
+	cd "/content/tools/cr-downloader"
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
 	rm config.zip
 	unzip config.zip
@@ -59,12 +21,62 @@ INSTALL_CLOUDFLARED() {
     wget "https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh" -O "/content/tools/cloudflared.sh"
 }
 
-INSTALL_ODRIVE &
-INSTALL_DOWNLOADERS &
-INSTALL_TOOLS &
-INSTALL_YTDLP &
+INSTALL_DOWNLOADERS(){
+	cd tools
+	#google drive downloader
+	pip install --upgrade gdown
+	#cryptodome for decrypt streams
+	pip install pycryptodome
+	#nextcloud e google index downloader
+	mkdir "nextcloud"
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/index-downloader.py -O nextcloud/index-downloader.py
+	#aria2c
+	sudo apt-get install aria2 -y
+	cd ..
+}
+
+INSTALL_ODRIVE(){
+	cd tools
+	git clone https://github.com/crackerbad/odrive
+	pip3 install -r odrive/requirements.txt
+	pip3 install selenium
+	pip3 install webdriver_manager
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
+	cd ..
+}
+
+INSTALL_YTDLP(){
+    wget -qO /usr/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+    chmod +x /usr/bin/yt-dlp
+}
+
+INSTALL_TOOLS(){
+	#ffmpeg
+	sudo apt-get install ffmpeg -y
+	#rename for rename files
+	sudo apt-get install rename
+	#mkvtoolnix
+	sudo apt-get install mkvtoolnix -y
+	#Croc Send files
+	#curl https://getcroc.schollz.com | bash
+}
+
+INSTALL_MEGA() {
+	echo "Installing MEGA ..."
+	sudo apt-get -y install libmms0 libc-ares2 libc6 libcrypto++6 libgcc1 libmediainfo0v5 libpcre3 libpcrecpp0v5 libssl1.1 libstdc++6 libzen0v5 zlib1g apt-transport-https
+	sudo curl -sL -o /var/cache/apt/archives/MEGAcmd.deb https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megacmd-Debian_9.0_amd64.deb
+	sudo dpkg -i /var/cache/apt/archives/MEGAcmd.deb
+	echo "MEGA is installed."
+}
+
 INSTALL_CRDOWNLOADER &
 INSTALL_CLOUDFLARED &
+INSTALL_DOWNLOADERS &
+INSTALL_ODRIVE &
+INSTALL_YTDLP &
+INSTALL_TOOLS &
+INSTALL_MEGA &
 
 echo Instalação Finalizada
 
