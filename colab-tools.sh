@@ -47,7 +47,7 @@ cd cr-downloader
 wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
 unzip config.zip
 cd ..
-
+./cr-downloader/aniDL &
 
 echo Instalação Finalizada
 
