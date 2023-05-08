@@ -15,7 +15,7 @@ echo "Cloudflared Argo Tunnel port $port will be ready in one minute"
 killall argo 2>/dev/null
 cd /content/tools/
 rm -f nohup.out
-nohup argo tunnel --url http://localhost:$port &
+nohup argo tunnel --url localhost:$port &
 sleep 5
 
 URL=$(grep -oh "https://\(.*\)trycloudflare.com" nohup.out)
