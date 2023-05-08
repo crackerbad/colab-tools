@@ -10,9 +10,10 @@ INSTALL_CRDOWNLOADER(){
 	rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
+	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1105185019846201394/config.zip"
 	unzip config.zip
 	rm config.zip
+	nohup ./aniDL &
 	cd "/content/"
 }
 
