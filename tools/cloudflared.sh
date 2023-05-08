@@ -1,16 +1,25 @@
 #!/bin/bash
 
+#!/bin/sh
+while getopts p: flag
+do
+    case "${flag}" in
+        p) port=${OPTARG};;
+    esac
+done
+
 #source /etc/env
 #export $(sed '/^#/d' /etc/env | cut -d= -f1)
-echo "Cloudflared Argo Tunnel will be ready in one minute"
+echo "Cloudflared Argo Tunnel port $port will be ready in one minute"
 
 killall argo 2>/dev/null
 cd /content/tools/
 rm -f nohup.out
-nohup argo tunnel --url http://localhost:3000 &
+nohup argo tunnel --url http://localhost:$port &
 sleep 5
 
 URL=$(grep -oh "https://\(.*\)trycloudflare.com" nohup.out)
 
+echo
 echo Argo Tunnel Iniciado em : ${URL}
 #tail -f

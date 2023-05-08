@@ -3,10 +3,10 @@ sudo apt-get update
 mkdir "tools"
 
 INSTALL_CRDOWNLOADER(){
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
+	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-cli.7z"
 	mkdir "/content/tools/cr-downloader"
-	7z e -y "multi-downloader-nx-ubuntu-gui.7z" -o/content/tools/cr-downloader/
-	rm multi-downloader-nx-ubuntu-gui.7z
+	7z e -y "multi-downloader-nx-ubuntu-cli.7z" -o/content/tools/cr-downloader/
+	rm multi-downloader-nx-ubuntu-cli.7z
 	cd "/content/tools/cr-downloader"
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1104601009357070387/config.zip"
 	unzip config.zip
