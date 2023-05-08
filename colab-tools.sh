@@ -5,7 +5,7 @@ mkdir "tools"
 INSTALL_CRDOWNLOADER(){
 	cd "tools"
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
-	7z e "multi-downloader-nx-ubuntu-gui.7z"
+	7z x "multi-downloader-nx-ubuntu-gui.7z"
 	rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
