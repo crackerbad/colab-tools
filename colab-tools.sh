@@ -63,7 +63,7 @@ INSTALL_TOOLS(){
 	#mkvtoolnix
 	sudo apt-get install mkvtoolnix -y
 	#Croc Send files
-	#curl https://getcroc.schollz.com | bash
+	curl https://getcroc.schollz.com | bash
 }
 
 INSTALL_MEGA() {
