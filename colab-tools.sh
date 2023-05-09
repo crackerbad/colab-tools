@@ -2,6 +2,9 @@
 sudo apt-get update
 mkdir "tools"
 
+#aria2c
+sudo apt-get install aria2 -y
+
 INSTALL_CRDOWNLOADER(){
 	cd "tools"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
@@ -53,8 +56,6 @@ INSTALL_YTDLP(){
 }
 
 INSTALL_TOOLS(){
-	#aria2c
-	sudo apt-get install aria2 -y
 	#ffmpeg
 	sudo apt-get install ffmpeg -y
 	#rename for rename files

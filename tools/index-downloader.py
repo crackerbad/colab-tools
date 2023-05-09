@@ -68,7 +68,7 @@ def func(payload_input, url, username, password):
 	        else:
 	            direct_download_link = url + urllib.parse.quote(files_name)
 	            result += f"Download de {files_name} em {OUTPUT_DIR} Concluido!\n"
-	            os.system(f'aria2c --auto-save-interval=0 -d {OUTPUT_DIR}/ {direct_download_link}')
+	            os.system(f'aria2c -x 8 -s 8 --auto-save-interval=0 -d {OUTPUT_DIR} {direct_download_link}')
 	            #create strmfiles
 	            #strmfile = open(f"{OUTPUT_DIR}/{files_name}.strm", "w")
 	            #strmfile.write(f"{direct_download_link}")
