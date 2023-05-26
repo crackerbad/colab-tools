@@ -17,7 +17,7 @@ INSTALL_CRDOWNLOADER(){
 	cd "/content/"
 }
 
-INSTALL_CLOUDFLARED() {
+INSTALL_CLOUDFLARED(){
 	#cloudflare argo
     wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/download/2023.4.2/cloudflared-fips-linux-amd64
     chmod +x /usr/bin/argo
@@ -63,9 +63,13 @@ INSTALL_TOOLS(){
 	sudo apt-get install mkvtoolnix -y
 	#Croc Send files
 	curl https://getcroc.schollz.com | bash
+	#Install ttyd
+	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
+	chmod +x /usr/bin/ttyd
+	nohup ttyd -p 7050 bash &
 }
 
-INSTALL_MEGA() {
+INSTALL_MEGA(){
 	echo "Installing MEGA ..."
 	sudo apt-get -y install libmms0 libc-ares2 libc6 libcrypto++6 libgcc1 libmediainfo0v5 libpcre3 libpcrecpp0v5 libssl1.1 libstdc++6 libzen0v5 zlib1g apt-transport-https
 	sudo curl -sL -o /var/cache/apt/archives/MEGAcmd.deb https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megacmd-Debian_9.0_amd64.deb
