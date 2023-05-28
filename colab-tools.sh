@@ -34,6 +34,7 @@ INSTALL_DOWNLOADERS(){
 	mkdir "nextcloud"
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/colab-index-downloader.py
 	cd ..
 }
 
