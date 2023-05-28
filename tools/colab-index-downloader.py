@@ -115,9 +115,9 @@ def download_files_from_list():
     try:
         print("Starting Downloads with aria2c:")
         list_file = list_folder+'/download_list.txt'
-        subprocess.run(['aria2c', "--dir=" + OUTPUT_DIR, "--input-file=" + list_file, "--max-concurrent-downloads=1",
-            "--connect-timeout=60", "--max-connection-per-server=16", "--continue=true", "--split=16", "--min-split-size=1M",
-            "--human-readable=true", "--download-result=full", "--file-allocation=none"])
+        subprocess.run(['aria2c', "--dir=" + OUTPUT_DIR, "--input-file=" + list_file, "--max-concurrent-downloads=3",
+            "--connect-timeout=60", "--max-connection-per-server=8", "--continue=true", "--split=16", "--min-split-size=1M",
+            "--human-readable=true", "--download-result=full", "--file-allocation=none", "--auto-save-interval=0"])
         if os.path.exists(list_file):
             os.remove(list_file)
         return True
