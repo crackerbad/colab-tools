@@ -54,6 +54,7 @@ INSTALL_YTDLP(){
 }
 
 INSTALL_TOOLS(){
+	sudo apt-get install nano -y
 	#aria2c
 	sudo apt-get install aria2 -y
 	#ffmpeg
@@ -64,7 +65,8 @@ INSTALL_TOOLS(){
 	sudo apt-get install mkvtoolnix -y
 	#Croc Send files
 	curl https://getcroc.schollz.com | bash
-	#Install ttyd
+	#Install ttyd & nano
+	sudo apt-get install nano -y
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
 	nohup ttyd -p 7050 bash &
