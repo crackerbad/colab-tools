@@ -15,8 +15,6 @@ else:
 
 list_file = list_folder + '/download_list.txt'
 
-print("Starting Index Downloader...\n")
-
 try:
     os.remove(list_file)
 except FileNotFoundError:
@@ -34,6 +32,8 @@ parser.add_argument('-o', '--output', help='output folder (optional)', required=
 parser.add_argument('-u', '--user', help='index username (optional)', required=False)
 parser.add_argument('-p', '--password', help='index password (optional)', required=False)
 args = parser.parse_args()
+
+print("\nStarting Index Downloader...\n")
 
 OUTPUT_DIR = args.output if args.output else "Download"
 isExist = os.path.exists(OUTPUT_DIR)
@@ -154,6 +154,7 @@ def main(url, username="none", password="none"):
         time.sleep(1)
         print(func(payload, url, username, password))
         x += 1
+
 
 def download_files_from_list():
     try:
