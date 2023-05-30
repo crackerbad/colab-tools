@@ -258,7 +258,7 @@ main () {
         nextcloud_share_password="${2}";
         output_dir_name="${3}"
     else
-        read -s -p "Enter NextCloud share password: " nextcloud_share_password;
+        #read -s -p "Enter NextCloud share password: " nextcloud_share_password;
         printf '\n\n';
         output_dir_name="${2}"
     fi
@@ -279,20 +279,34 @@ main () {
     # List content of NextCloud subdir "${nextcloud_share_subdir}" share URL ("${nextcloud_share_url}").
     # The results are stored in "${nextcloud_dir_listing_array[@]}".
     list_content_nextcloud_share_url;
-
-    read -p "Baixar do :  "  inicio
-    read -p "Até o : "  fim
-    seq -s ' ' $inicio $fim
-    echo "Copie a sequencia acima e cole abaixo"
-    read -a file_or_dir_numbers -p 'Give list of file numbers to download and or directories to list: '
+    echo "Enter the file number you want to download."
+    echo "Ex: '1-4' or '1 2 3 4' or '5'"
+    read -a file_or_dir_numbers -p 'Files to download: '
 
     local -a nextcloud_share_list_selected_subdirs;
+    local -a expanded_numbers;
 
-    for file_or_dir_number_str in "${file_or_dir_numbers[@]}" ; do
+    for range_str in "${file_or_dir_numbers[@]}"; do
+        if [[ $range_str == *-* ]]; then
+            start_range=$(echo "$range_str" | cut -d'-' -f1)
+            end_range=$(echo "$range_str" | cut -d'-' -f2)
+
+            if [[ "$start_range" -gt "$end_range" ]]; then
+                printf '\nError: Invalid range "%s". Start range should be less than or equal to end range.\n\n' "$range_str"
+                return 1
+            fi
+
+            expanded_numbers+=( $(seq "$start_range" "$end_range") )
+        else
+            expanded_numbers+=( "$range_str" )
+        fi
+    done
+
+    for file_or_dir_number_str in "${expanded_numbers[@]}"; do
         # Remove all non-numeric characters.
         file_or_dir_number=$(echo ${file_or_dir_number_str} | tr -c -d '0-9');
 
-        if [[ "${file_or_dir_number_str}" != "${file_or_dir_number}" || "${file_or_dir_number}" -ge ${#nextcloud_dir_listing_array[@]} ]] ; then
+        if [[ "${file_or_dir_number_str}" != "${file_or_dir_number}" || "${file_or_dir_number}" -ge ${#nextcloud_dir_listing_array[@]} ]]; then
             printf '\nError: File or dir number "%s" does not exist.\n\n' "${file_or_dir_number_str}";
             return 1;
         fi
@@ -301,17 +315,18 @@ main () {
         nextcloud_file_or_dir_name="${nextcloud_dir_listing_array[${file_or_dir_number}]}";
         nextcloud_file_or_dir_name="${nextcloud_file_or_dir_name%%$'\t'*}";
 
-        if [ "${nextcloud_file_or_dir_name:$(( ${#nextcloud_file_or_dir_name} - 1 ))}" = '/' ] ; then
+        if [ "${nextcloud_file_or_dir_name:$(( ${#nextcloud_file_or_dir_name} - 1 ))}" = '/' ]; then
             # Store subdirectory for later listening of content.
             nextcloud_share_list_selected_subdirs+=("${nextcloud_file_or_dir_name}");
         else
-        # Download file from NextCloud share.
-           #mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
-          # pushd "$(fixfolder ${nextcloud_share_subdir})"
-        download_file_from_nextcloud_share "${nextcloud_host_url}/public.php/webdav${nextcloud_file_or_dir_name}" $(basename "${nextcloud_file_or_dir_name}");
-         #  popd
+            # Download file from NextCloud share.
+            # mkdir -p "$(fixfolder ${nextcloud_share_subdir})"
+            # pushd "$(fixfolder ${nextcloud_share_subdir})"
+            download_file_from_nextcloud_share "${nextcloud_host_url}/public.php/webdav${nextcloud_file_or_dir_name}" $(basename "${nextcloud_file_or_dir_name}");
+            # popd
         fi
     done
+
 
     # List content of selected subdirectories.
     for nextcloud_share_list_selected_subdir in "${nextcloud_share_list_selected_subdirs[@]}" ; do
