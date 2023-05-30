@@ -155,7 +155,6 @@ def main(url, username="none", password="none"):
         print(func(payload, url, username, password))
         x += 1
 
-
 def download_files_from_list():
     try:
         print("\nStarting Downloads with aria2c...")
