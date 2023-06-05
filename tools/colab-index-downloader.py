@@ -1,12 +1,8 @@
 import argparse
-import requests
-import base64
-import json
-import urllib
-import os
-import subprocess
+import requests, base64, json, urllib
+import os, subprocess
 import time
-
+import re
 
 if os.name == 'posix':
     list_folder = '/home/'
@@ -31,6 +27,7 @@ parser.add_argument('-i', '--index', help='index link', required=True)
 parser.add_argument('-o', '--output', help='output folder (optional)', required=False)
 parser.add_argument('-u', '--user', help='index username (optional)', required=False)
 parser.add_argument('-p', '--password', help='index password (optional)', required=False)
+parser.add_argument('-s', '--simul', help='Number of simultaneous downloads (default=1)', required=False)
 args = parser.parse_args()
 
 print("\nStarting Index Downloader...\n")
@@ -59,7 +56,7 @@ def func(payload_input, url, username, password):
     url = f"{url}/" if url[-1] != "/" else url
 
     try:
-        headers = {"authorization": authorization_token(username, password)}
+        headers = {"authorization": authorization_token(username, password), "Referer": index_link}
     except:
         return "username/password combination is wrong"
 
@@ -88,7 +85,7 @@ def func(payload_input, url, username, password):
 
             if not page_one_loaded:
                 print("Loading Page: 1")
-                time.sleep(1)
+                time.sleep(0.5)
                 page_one_loaded = True
 
             if files_type != "application/vnd.google-apps.folder":
@@ -109,6 +106,16 @@ def save_download_links_to_file(download_links, file_path):
         for link in download_links:
             txt_file.write(link + "\n")
 
+def organize_file(file_path):
+    def natural_sort_key(s):
+        return [int(c) if c.isdigit() else c.lower() for c in re.split(r'(\d+)', s)]
+
+    with open(file_path, 'r') as file:
+        url_lines = file.readlines()
+        sorted_url_lines = sorted(url_lines, key=natural_sort_key)
+
+    with open(file_path, 'w') as file:
+        file.writelines(sorted_url_lines)
 
 def remove_duplicates(file_path):
     global page_one_loaded
@@ -134,6 +141,8 @@ def remove_duplicates(file_path):
     #print(f"Removed duplicate links: {removed_count}")
     if removed_count < final_count * 0.5:
         print(f"Total files found: {final_count}")
+        time.sleep(0.5)
+        organize_file(list_file)
 
     if removed_count > final_count * 0.5:
         print("\nError encountered, trying again. Please wait!")
@@ -152,16 +161,20 @@ def main(url, username="none", password="none"):
     while next_page:
         payload = {"page_token": next_page_token, "page_index": x}
         print(f"Loading Page: {x + 2}")
-        time.sleep(1)
+        time.sleep(0.5)
         print(func(payload, url, username, password))
         x += 1
-
 
 def download_files_from_list():
     try:
         print("\nStarting Downloads with aria2c...")
-        subprocess.run(['aria2c', "--dir=" + OUTPUT_DIR, "--input-file=" + list_file, "--max-concurrent-downloads=8",
-            "--connect-timeout=60", "--max-connection-per-server=4", "--continue=true", "--split=4", "--min-split-size=1M",
+        simuldown = args.simul if args.simul else "1"
+        if simuldown == "1":
+            maxc_and_split = "16"
+        else:
+            maxc_and_split = "4"
+        subprocess.run(['aria2c', "--dir=" + OUTPUT_DIR, "--input-file=" + list_file, "--max-concurrent-downloads=" + simuldown,
+            "--connect-timeout=60", "--max-connection-per-server=" + maxc_and_split, "--continue=true", "--split=" + maxc_and_split, "--min-split-size=1M",
             "--human-readable=true", "--download-result=full", "--file-allocation=none", "--auto-save-interval=0"])
         if os.path.exists(list_file):
             os.remove(list_file)
@@ -184,7 +197,7 @@ username = args.user if args.user else "username-default"
 password = args.password if args.password else "password-default"
 
 main(url=index_link, username=username, password=password)
-time.sleep(1)
+time.sleep(0.5)
 remove_duplicates(list_file)
 time.sleep(2)
 download_files_from_list()
