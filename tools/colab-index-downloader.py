@@ -27,7 +27,7 @@ parser.add_argument('-i', '--index', help='index link', required=True)
 parser.add_argument('-o', '--output', help='output folder (optional)', required=False)
 parser.add_argument('-u', '--user', help='index username (optional)', required=False)
 parser.add_argument('-p', '--password', help='index password (optional)', required=False)
-parser.add_argument('-s', '--simul', help='Number of simultaneous downloads (default=1)', required=False)
+parser.add_argument('-s', '--simul', help='number of simultaneous downloads (default=1)', required=False)
 args = parser.parse_args()
 
 print("\nStarting Index Downloader...\n")
