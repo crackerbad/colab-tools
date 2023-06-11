@@ -1,4 +1,6 @@
 #!/bin/sh
+source /etc/env
+
 sudo apt-get update
 mkdir "tools"
 
@@ -83,11 +85,23 @@ INSTALL_MEGA(){
 
 INSTALL_TOOLS
 INSTALL_MEGA
-INSTALL_CRDOWNLOADER &
 INSTALL_CLOUDFLARED &
 INSTALL_DOWNLOADERS &
-INSTALL_ODRIVE &
-INSTALL_YTDLP &
+
+# Install Crunchyroll-Downloader
+if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
+	INSTALL_CRDOWNLOADER &
+fi
+
+# Install Youtube-DLP
+if [ "${YTDLP_INSTALL}" = "Enable" ]; then
+	INSTALL_YTDLP &
+fi
+
+# Install Odrive
+if [ "${ODRIVE_INSTALL}" = "Enable" ]; then
+	INSTALL_ODRIVE &
+fi
 
 echo Instalação Finalizada
 
