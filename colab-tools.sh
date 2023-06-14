@@ -4,6 +4,8 @@ source /etc/env
 sudo apt-get update
 mkdir "tools"
 
+
+
 INSTALL_CRDOWNLOADER(){
 	cd "tools"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
@@ -22,8 +24,8 @@ INSTALL_CRDOWNLOADER(){
 
 INSTALL_CLOUDFLARED(){
 	#cloudflare argo
-    wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/download/2023.4.2/cloudflared-fips-linux-amd64
-    chmod +x /usr/bin/argo
+	wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+	chmod +x /usr/bin/argo
     wget "https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh" -O "/content/tools/cloudflared.sh"
 }
 
@@ -72,7 +74,7 @@ INSTALL_TOOLS(){
 	sudo apt-get install nano -y
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
-	nohup ttyd -p 7050 bash &
+	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash &
 }
 
 INSTALL_MEGA(){
@@ -84,13 +86,17 @@ INSTALL_MEGA(){
 }
 
 INSTALL_TOOLS
-INSTALL_MEGA
 INSTALL_CLOUDFLARED &
 INSTALL_DOWNLOADERS &
 
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
 	INSTALL_CRDOWNLOADER &
+fi
+
+# Install MEGA
+if [ "${MEGA_INSTALL}" = "Enable" ]; then
+	INSTALL_MEGA
 fi
 
 # Install Youtube-DLP
