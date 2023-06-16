@@ -3,7 +3,7 @@ source /etc/env
 
 sudo apt-get update
 mkdir "tools"
-
+mkdir "logs"
 
 
 INSTALL_CRDOWNLOADER(){
@@ -27,6 +27,7 @@ INSTALL_CLOUDFLARED(){
 	wget -qO /usr/bin/argo https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
 	chmod +x /usr/bin/argo
     wget "https://github.com/crackerbad/colab-tools/raw/main/tools/cloudflared.sh" -O "/content/tools/cloudflared.sh"
+    bash /content/tools/cloudflared.sh &
 }
 
 INSTALL_DOWNLOADERS(){
@@ -75,6 +76,12 @@ INSTALL_TOOLS(){
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
 	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash &
+	#jdownloader scripts
+	cd /content/colab-tools
+	mkdir jdownloader
+	cd jdownloader
+	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/move_downloads.py"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
 }
 
 INSTALL_MEGA(){
@@ -92,6 +99,11 @@ INSTALL_DOWNLOADERS &
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
 	INSTALL_CRDOWNLOADER &
+fi
+
+# Install pyLoad
+if [ "${PYLOAD_INSTALL}" = "Enable" ]; then
+	INSTALL_PYLOAD
 fi
 
 # Install MEGA
