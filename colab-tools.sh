@@ -110,8 +110,8 @@ INSTALL_CADDY(){
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip
 	rm homer.zip
-	rm "/content/homer/assets/config.yml"
-	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" "/content/homer/assets/config.yml"
+	#rm "/content/homer/assets/config.yml"
+	#wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" -O "/content/homer/assets/config.yml"
 }
 
 INSTALL_TOOLS
