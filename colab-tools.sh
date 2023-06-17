@@ -5,7 +5,6 @@ sudo apt-get update
 mkdir "tools"
 mkdir "logs"
 
-
 INSTALL_CRDOWNLOADER(){
 	cd "tools"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
@@ -60,7 +59,8 @@ INSTALL_YTDLP(){
 }
 
 INSTALL_TOOLS(){
-	sudo apt-get install nano -y
+	#rclone
+	curl https://rclone.org/install.sh | sudo bash
 	#aria2c
 	sudo apt-get install aria2 -y
 	#ffmpeg
