@@ -11,9 +11,9 @@
         }
         redir @http-req https://{host}{uri}
         # Configure ttyd
-        handle /ttyd* {
-                redir /ttyd /ttyd/
-                uri strip_prefix /ttyd
+        handle /home/ttyd* {
+                redir /home/ttyd /ttyd/
+                uri strip_prefix /home/ttyd
                 reverse_proxy * localhost:61803
         }
         # Configure qbittorrent
