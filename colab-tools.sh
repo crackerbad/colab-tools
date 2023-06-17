@@ -4,6 +4,7 @@ source /etc/env
 sudo apt-get update
 mkdir "tools"
 mkdir "logs"
+rm -r /content/sample_data
 
 INSTALL_CRDOWNLOADER(){
 	cd "tools"
@@ -109,6 +110,8 @@ INSTALL_CADDY(){
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip
 	rm homer.zip
+	rm "/content/homer/assets/config.yml"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" "/content/homer/assets/config.yml"
 }
 
 INSTALL_TOOLS
