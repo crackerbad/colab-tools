@@ -1,1 +1,37 @@
-
+{
+        log {
+                exclude http.handlers.reverse_proxy
+        }
+}
+:8880 {
+        encode gzip
+        # Force HTTPS
+        @http-req {
+                header X-Forwarded-Proto http
+        }
+        redir @http-req https://{host}{uri}
+        # Configure ttyd
+        handle /ttyd* {
+                redir /ttyd /ttyd/
+                uri strip_prefix /ttyd
+                reverse_proxy * localhost:61803
+        }
+        # Configure qbittorrent
+        handle /qbit* {
+                redir /qbit /qbit/
+                uri strip_prefix /qbit
+                reverse_proxy * {
+                        to localhost:61804
+                        header_up Host "127.0.0.1:61804"
+                }
+        }
+        # Configure Filebrowser
+        handle /filebrowser* {
+                reverse_proxy /filebrowser* localhost:61801
+        }
+        # Configure homer
+        handle * {
+                root * /content/homer
+                file_server
+        }
+}
