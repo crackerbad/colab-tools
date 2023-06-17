@@ -77,7 +77,7 @@ INSTALL_TOOLS(){
 	chmod +x /usr/bin/ttyd
 	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
 	#jdownloader scripts
-	cd /content/
+	cd /content/tools
 	mkdir jdownloader
 	cd jdownloader
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/move_downloads.py"
