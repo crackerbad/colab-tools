@@ -12,7 +12,7 @@
         redir @http-req https://{host}{uri}
         # Configure ttyd
         handle /home/ttyd* {
-                redir /home/ttyd /ttyd/
+                redir /home/ttyd /home/ttyd/
                 uri strip_prefix /home/ttyd
                 reverse_proxy * localhost:61803
         }
