@@ -93,7 +93,25 @@ INSTALL_MEGA(){
 	echo "MEGA is installed."
 }
 
+INSTALL_CADDY(){
+	#caddy
+	wget -qO /usr/bin/caddy "https://caddyserver.com/api/download?os=linux&arch=amd64"
+	chmod +x /usr/bin/caddy
+	mkdir /content/tools/caddy
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/Caddyfile" -O "/content/tools/caddy/Caddyfile"
+	nohup caddy run --config /content/tools/caddy/Caddyfile --adapter caddyfile > /content/logs/caddy.log 2>&1 &
+	#filebrowser
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/filebrowser.db"
+	curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+	filebrowser -r /content/ -p 61801
+	#homer
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
+	unzip homer.zip
+	rm homer.zip
+}
+
 INSTALL_TOOLS
+INSTALL_CADDY
 INSTALL_CLOUDFLARED &
 INSTALL_DOWNLOADERS &
 
