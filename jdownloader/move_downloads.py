@@ -1,14 +1,24 @@
 import os
 import argparse
-import shutil
+import subprocess
 import time
+import random
+
+def generate_random_service_account_number():
+    random_number = random.randint(1, 200)
+    return random_number
+
+def generate_service_account_filepath(number):
+    filename = f"{number:03}.json"
+    filepath = f"/root/.config/rclone/accounts/{filename}"
+    return filepath
 
 parser = argparse.ArgumentParser(description='Move Downloads.')
 parser.add_argument('-o', '--output', help='output folder', required=True)
 args = parser.parse_args()
 
 # Pasta de origem e destino
-pasta_origem = "/content/downloads"
+pasta_origem = "/root/Downloads"
 pasta_destino = args.output
 
 # Extensões de arquivo a serem ignoradas
@@ -42,17 +52,30 @@ def mover_arquivos(pasta_origem, pasta_destino):
             nome_arquivo, extensao = os.path.splitext(arquivo)
             if extensao.lower() not in extensoes_ignoradas:
                 caminho_origem = os.path.join(pasta_atual, arquivo)
-                caminho_destino = os.path.join(pasta_destino, pasta_atual[len(pasta_origem) + 1:], arquivo)
+                caminho_relativo = os.path.relpath(caminho_origem, pasta_origem)
+                caminho_destino = os.path.join(pasta_destino, caminho_relativo)
 
                 # Verificar se o arquivo está sendo alterado
                 tamanho_atual = obter_tamanho_arquivo(caminho_origem)
                 tamanho_anterior = tamanhos_arquivos.get(caminho_origem)
 
                 if tamanho_anterior is not None and tamanho_atual == tamanho_anterior:
+                    random_number = generate_random_service_account_number()
+                    service_account_file = generate_service_account_filepath(random_number)
                     # O tamanho do arquivo permaneceu o mesmo, prosseguir com a movimentação
-                    pasta_destino_arquivo = os.path.dirname(caminho_destino)
-                    os.makedirs(pasta_destino_arquivo, exist_ok=True)  # Criar a subpasta de destino se não existir
-                    shutil.move(caminho_origem, caminho_destino)
+                    subprocess.run(['rclone', 
+                                    'copy', 
+                                    f"alias:{caminho_origem}", 
+                                    os.path.dirname(caminho_destino), 
+                                    '--progress', 
+                                    '--stats-one-line',
+                                    '--drive-chunk-size', 
+                                    '128M', 
+                                    f"--drive-service-account-file={service_account_file}"])
+
+                    # Após a cópia, excluir o arquivo da origem
+                    os.remove(caminho_origem)
+
                     print(f"Movido: {caminho_origem} -> {caminho_destino}")
                 else:
                     # O tamanho do arquivo foi alterado, aguardar antes de tentar mover novamente
@@ -67,7 +90,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
 
         # Criar as subpastas de destino se houver subpastas com arquivos
         for subpasta in subpastas_com_arquivos:
-            caminho_destino = os.path.join(pasta_destino, pasta_atual[len(pasta_origem) + 1:], subpasta)
+            caminho_destino = os.path.join(pasta_destino, os.path.relpath(os.path.join(pasta_atual, subpasta), pasta_origem))
             os.makedirs(caminho_destino, exist_ok=True)
             print(f"Criada pasta de destino: {caminho_destino}")
 
@@ -85,4 +108,4 @@ def mover_arquivos(pasta_origem, pasta_destino):
 # Executar a função de movimentação em loop infinito
 while True:
     mover_arquivos(pasta_origem, pasta_destino)
-    time.sleep(10)  # Aguardar 10 segundos entre as verificações
+    time.sleep(5)  # Aguardar 10 segundos entre as verificações
