@@ -18,7 +18,7 @@ INSTALL_CRDOWNLOADER(){
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1105185019846201394/config.zip"
 	unzip config.zip
 	rm config.zip
-	nohup ./aniDL &
+	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
 
@@ -75,13 +75,14 @@ INSTALL_TOOLS(){
 	sudo apt-get install nano -y
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
-	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash &
+	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
 	#jdownloader scripts
-	cd /content/colab-tools
+	cd /content/
 	mkdir jdownloader
 	cd jdownloader
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/move_downloads.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
+	cd /content/
 }
 
 INSTALL_MEGA(){
@@ -99,11 +100,6 @@ INSTALL_DOWNLOADERS &
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
 	INSTALL_CRDOWNLOADER &
-fi
-
-# Install pyLoad
-if [ "${PYLOAD_INSTALL}" = "Enable" ]; then
-	INSTALL_PYLOAD
 fi
 
 # Install MEGA
