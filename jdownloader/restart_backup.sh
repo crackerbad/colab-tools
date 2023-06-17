@@ -14,7 +14,7 @@ if [ -z "$pid" ]; then
     nohup python /content/tools/jdownloader/move_downloads.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
 else
     # Processo em execução
-    echo "Processo $nome_script (PID: $pid) já está em execução,"
+    echo "Processo $nome_script (PID: $pid) já está em execução."
     kill "$pid"
     nohup python /content/tools/jdownloader/move_downloads.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
     echo "Sistema de Backup Reiniciado."
