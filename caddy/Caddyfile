@@ -30,9 +30,9 @@
 		reverse_proxy /home/files* localhost:61801
 	}
         # Configure homer
-        handle /home* {
-                redir /home /home/
-                uri strip_prefix /home
+        handle * {
+                #redir /home /home/
+                #uri strip_prefix /home
                 root * /content/homer
                 file_server
         }
