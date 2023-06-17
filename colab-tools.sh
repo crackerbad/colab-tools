@@ -101,9 +101,9 @@ INSTALL_CADDY(){
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/Caddyfile" -O "/content/tools/caddy/Caddyfile"
 	nohup caddy run --config /content/tools/caddy/Caddyfile --adapter caddyfile > /content/logs/caddy.log 2>&1 &
 	#filebrowser
-	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/filebrowser.db"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/filebrowser.db" -O "/content/tools/caddy/filebrowser.db"
 	curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
-	nohup filebrowser -r /content/ -p 61801 > /content/logs/filebrowser.log 2>&1 &
+	nohup filebrowser -d "/content/tools/caddy/filebrowser.db" -r /content/ -p 61801 > /content/logs/filebrowser.log 2>&1 &
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip
