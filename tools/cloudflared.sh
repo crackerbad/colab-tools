@@ -1,6 +1,4 @@
 #!/bin/bash
-
-#!/bin/sh
 while getopts p: flag
 do
     case "${flag}" in
@@ -22,4 +20,5 @@ URL=$(grep -oh "https://\(.*\)trycloudflare.com" nohup.out)
 
 echo
 echo Argo Tunnel Iniciado em : ${URL}
+rm -f nohup.out
 #tail -f
