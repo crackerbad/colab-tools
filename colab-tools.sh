@@ -103,7 +103,7 @@ INSTALL_CADDY(){
 	#filebrowser
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/filebrowser.db"
 	curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
-	filebrowser -r /content/ -p 61801
+	nohup filebrowser -r /content/ -p 61801 > /content/logs/filebrowser.log 2>&1 &
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip
