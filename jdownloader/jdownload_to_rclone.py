@@ -67,11 +67,10 @@ def mover_arquivos(pasta_origem, pasta_destino):
                                     'copy', 
                                     f"alias:{caminho_origem}", 
                                     os.path.dirname(caminho_destino), 
-                                    '--progress', 
-                                    '--stats-one-line',
                                     '--drive-chunk-size', 
                                     '128M', 
-                                    f"--drive-service-account-file={service_account_file}"])
+                                    f"--drive-service-account-file={service_account_file}", 
+                                    "--log-file=/content/logs/rclone_jdownloader.log"])
 
                     # Após a cópia, excluir o arquivo da origem
                     os.remove(caminho_origem)
@@ -87,12 +86,6 @@ def mover_arquivos(pasta_origem, pasta_destino):
 
         # Verificar se há subpastas com arquivos
         subpastas_com_arquivos = [subpasta for subpasta in subpastas if verificar_modificacao_arquivos(os.path.join(pasta_atual, subpasta))]
-
-        # Criar as subpastas de destino se houver subpastas com arquivos
-        for subpasta in subpastas_com_arquivos:
-            caminho_destino = os.path.join(pasta_destino, os.path.relpath(os.path.join(pasta_atual, subpasta), pasta_origem))
-            os.makedirs(caminho_destino, exist_ok=True)
-            print(f"Criada pasta de destino: {caminho_destino}")
 
         # Excluir pastas vazias na pasta de origem
         if pasta_atual != pasta_origem and not subpastas and not arquivos_existentes:
