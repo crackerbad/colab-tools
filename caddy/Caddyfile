@@ -17,26 +17,8 @@
                 reverse_proxy * localhost:61803
         }
         # Configure qbittorrent
-        handle /home/qbit* {
-                redir /home/qbit /home/qbit/
-                uri strip_prefix /qbit
-                reverse_proxy * {
-                        to localhost:61804
-                        header_up Host "127.0.0.1:61804"
-                }
-        }
-        # Configure Vuetorrent   
-	handle /home/vue* {
-		redir /home/vue /home/vue/
-		uri strip_prefix /home/vue
-		handle /api* {
-			reverse_proxy * {
-				to localhost:61804
-				header_up Host "127.0.0.1:61804"
-			}
-		}
-		root * /content/tools/qBittorrent/vuetorrent/public
-		file_server
+	handle /home/qbit* {
+		reverse_proxy /home/qbit* localhost:61804
 	}
 	# Configure Filebrowser
 	handle /home/files* {
