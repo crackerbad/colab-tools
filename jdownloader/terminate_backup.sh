@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nome do script Python a ser encerrado
-nome_script="move_downloads.py"
+nome_script="jdownload_to_rclone.py"
 
 
 # Obtém o PID do processo Python com base no nome do script
