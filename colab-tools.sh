@@ -5,19 +5,18 @@ sudo apt-get update
 mkdir "tools"
 mkdir "logs"
 rm -r /content/sample_data
+sudo apt-get -y install busybox
 
 INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
-	7z x "multi-downloader-nx-ubuntu-gui.7z"
-	rm multi-downloader-nx-ubuntu-gui.7z
+	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1105185019846201394/config.zip"
-	unzip config.zip
-	rm config.zip
+	unzip config.zip && rm config.zip
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
@@ -108,14 +107,15 @@ INSTALL_CADDY(){
 	nohup filebrowser -d "/content/tools/caddy/filebrowser.db" -r /content/ -b /home/files -p 61801 > /content/logs/filebrowser.log 2>&1 &
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
-	unzip homer.zip
-	rm homer.zip
+	unzip homer.zip && rm homer.zip
 	#rm "/content/homer/assets/config.yml"
 	#wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" -O "/content/homer/assets/config.yml"
 }
 
 INSTALL_QBITTORRENT() {
 	#qbittorrent
+	mkdir /content/tools/qbittorrent/
+	wget -qO - "https://github.com/crackerbad/colab-tools/raw/main/caddy/qb_dark.zip" | unzip -qd /content/tools/qbittorrent/ - && rm qb_dark.zip
 	mkdir /root/.config/qBittorrent/
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
 	sudo apt-get -y install qbittorrent-nox
