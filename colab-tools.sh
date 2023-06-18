@@ -112,6 +112,16 @@ INSTALL_CADDY(){
 	rm homer.zip
 	#rm "/content/homer/assets/config.yml"
 	#wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" -O "/content/homer/assets/config.yml"
+
+	#qbittorrent
+	wget "https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-4.5.3.10/qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
+	unzip "qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
+	rm "qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
+	mkdir /content/tools/qBittorrent
+	mv /content/qbittorrent-nox /content/tools/qBittorrent/
+	chmod 777 /content/tools/qBittorrent/qbittorrent-nox
+	mkdir "/root/.config/qBittorent"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorent/qBittorrent.conf"
 }
 
 INSTALL_TOOLS
