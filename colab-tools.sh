@@ -116,7 +116,11 @@ INSTALL_CADDY(){
 
 INSTALL_QBITTORRENT() {
 	#qbittorrent
-	sudo apt-get install qbittorrent-nox
+	mkdir /root/.config/qBittorrent/
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
+	sudo apt-get -y install qbittorrent-nox
+	#run qbitttorent
+	nohup qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
 }
 
 
@@ -140,11 +144,11 @@ if [ "${ODRIVE_INSTALL}" = "Enable" ]; then
 	INSTALL_ODRIVE &
 fi
 
+INSTALL_QBITTORRENT
 INSTALL_TOOLS &
 INSTALL_CLOUDFLARED &
 INSTALL_DOWNLOADERS &
 INSTALL_CADDY
-INSTALL_QBITTORRENT
 
 echo Instalação Finalizada
 
