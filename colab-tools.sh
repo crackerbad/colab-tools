@@ -112,7 +112,9 @@ INSTALL_CADDY(){
 	rm homer.zip
 	#rm "/content/homer/assets/config.yml"
 	#wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" -O "/content/homer/assets/config.yml"
+}
 
+INSTALL_QBITTORRENT() {
 	#qbittorrent
 	wget "https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases/download/release-4.5.3.10/qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
 	unzip "qbittorrent-enhanced-nox_x86_64-linux-musl_static.zip"
@@ -122,6 +124,10 @@ INSTALL_CADDY(){
 	chmod 777 /content/tools/qBittorrent/qbittorrent-nox
 	mkdir "/root/.config/qBittorrent"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
+	#vuetorrent
+    wget -qP /root/temp https://github.com/WDaan/VueTorrent/releases/latest/download/vuetorrent.zip
+    unzip -qd /content/tools/qBittorrent/ /root/temp/vuetorrent.zip
+	#run qbitttorent
 	nohup /content/tools/qBittorrent/qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
 }
 
@@ -150,6 +156,7 @@ INSTALL_TOOLS
 INSTALL_CLOUDFLARED
 INSTALL_DOWNLOADERS
 INSTALL_CADDY
+INSTALL_QBITTORRENT
 
 echo Instalação Finalizada
 
