@@ -14,4 +14,6 @@ else
     # Processo em execução
     echo "Finalizando processo $nome_script (PID: $pid)."
     kill "$pid"
+    echo "Reiniciando processo $nome_script..."
+    nohup qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
 fi
