@@ -26,7 +26,7 @@
                 }
         }
         # Configure Vuetorrent   
-	handle {/home/vue* {
+	handle /home/vue* {
 		redir /home/vue /home/vue/
 		uri strip_prefix /home/vue
 		handle /api* {
@@ -35,9 +35,8 @@
 				header_up Host "127.0.0.1:61804"
 			}
 		}
-		root * /content/tools/qbittorent/vuetorrent/public
+		root * /content/tools/qBittorrent/vuetorrent/public
 		file_server
-                }
 	}
 	# Configure Filebrowser
 	handle /home/files* {
