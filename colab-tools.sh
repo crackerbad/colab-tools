@@ -120,9 +120,9 @@ INSTALL_CADDY(){
 	mkdir /content/tools/qBittorrent
 	mv /content/qbittorrent-nox /content/tools/qBittorrent/
 	chmod 777 /content/tools/qBittorrent/qbittorrent-nox
-	mkdir "/root/.config/qBittorent"
+	mkdir "/root/.config/qBittorrent"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
-	nohup /content/tools/qBittorrent/qbittorrent-nox > /content/logs/qbittorent.log 2>&1 &
+	nohup /content/tools/qBittorrent/qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
 }
 
 
