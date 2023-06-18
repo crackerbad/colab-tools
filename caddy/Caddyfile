@@ -1,52 +1,53 @@
 {
-        log {
-                exclude http.handlers.reverse_proxy
-        }
+    log {
+        exclude http.handlers.reverse_proxy
+    }
 }
+
 :8880 {
-        encode gzip
-        # Force HTTPS
-        @http-req {
-                header X-Forwarded-Proto http
+    encode gzip
+    # Force HTTPS
+    @http-req {
+        header X-Forwarded-Proto http
+    }
+    redir @http-req https://{host}{uri}
+    # Configure ttyd
+    handle /home/ttyd* {
+        redir /home/ttyd /home/ttyd/
+        uri strip_prefix /home/ttyd
+        reverse_proxy * localhost:61803
+    }
+    # Configure qbittorrent
+    handle /home/qbit* {
+        redir /home/qbit /home/qbit/
+        uri strip_prefix /qbit
+        reverse_proxy * {
+            to localhost:61804
+            header_up Host "127.0.0.1:61804"
         }
-        redir @http-req https://{host}{uri}
-        # Configure ttyd
-        handle /home/ttyd* {
-                redir /home/ttyd /home/ttyd/
-                uri strip_prefix /home/ttyd
-                reverse_proxy * localhost:61803
+    }
+    # Configure Vuetorrent   
+    handle /home/vue* {
+        redir /home/vue /home/vue/
+        uri strip_prefix /home/vue
+        handle /api* {
+            reverse_proxy * {
+                to localhost:61804
+                header_up Host "127.0.0.1:61804"
+            }
         }
-        # Configure qbittorrent
-        handle /home/qbit* {
-                redir /home/qbit /home/qbit/
-                uri strip_prefix /qbit
-                reverse_proxy * {
-                        to localhost:61804
-                        header_up Host "127.0.0.1:61804"
-                }
-        }
-        # Configure Vuetorrent   
-	handle {/home/vue* {
-		redir /home/vue /home/vue/
-		uri strip_prefix /home/vue
-		handle /api* {
-			reverse_proxy * {
-				to localhost:61804
-				header_up Host "127.0.0.1:61804"
-			}
-		}
-		root * /content/tools/qbittorent/vuetorrent/public
-		file_server
-	}
-	# Configure Filebrowser
-	handle /home/files* {
-		reverse_proxy /home/files* localhost:61801
-	}
-        # Configure homer
-        handle * {
-                #redir /home /home/
-                #uri strip_prefix /home
-                root * /content/homer
-                file_server
-        }
+        root * /content/tools/qbittorent/vuetorrent/public
+        file_server
+    }
+    # Configure Filebrowser
+    handle /home/files* {
+        reverse_proxy /home/files* localhost:61801
+    }
+    # Configure homer
+    handle * {
+        #redir /home /home/
+        #uri strip_prefix /home
+        root * /content/homer
+        file_server
+    }
 }
