@@ -125,10 +125,11 @@ INSTALL_CADDY(){
 	exec /content/tools/qBittorrent/qbittorrent-nox
 }
 
+cd /content/
 INSTALL_TOOLS
 INSTALL_CADDY
-INSTALL_CLOUDFLARED &
-INSTALL_DOWNLOADERS &
+INSTALL_CLOUDFLARED
+INSTALL_DOWNLOADERS
 
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
