@@ -13,12 +13,12 @@ def generate_service_account_filepath(number):
     filepath = f"/root/.config/rclone/accounts/{filename}"
     return filepath
 
-parser = argparse.ArgumentParser(description='Move Downloads.')
+parser = argparse.ArgumentParser(description='Rclone Upload Downloads.')
 parser.add_argument('-o', '--output', help='output folder', required=True)
 args = parser.parse_args()
 
 # Pasta de origem e destino
-pasta_origem = "/root/Downloads"
+pasta_origem = "/content/downloads/jd2_downloads"
 pasta_destino = args.output
 
 # Extensões de arquivo a serem ignoradas
