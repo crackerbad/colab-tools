@@ -7,7 +7,7 @@ mkdir "logs"
 rm -r /content/sample_data
 
 INSTALL_CRDOWNLOADER(){
-	cd "tools"
+	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
@@ -31,7 +31,7 @@ INSTALL_CLOUDFLARED(){
 }
 
 INSTALL_DOWNLOADERS(){
-	cd tools
+	cd /content/tools
 	#google drive downloader
 	pip install --upgrade gdown
 	#cryptodome for decrypt streams
@@ -41,17 +41,17 @@ INSTALL_DOWNLOADERS(){
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/colab-index-downloader.py
-	cd ..
+	cd /content/
 }
 
 INSTALL_ODRIVE(){
-	cd tools
+	cd /content/tools
 	git clone https://github.com/crackerbad/odrive
 	pip3 install -r odrive/requirements.txt
 	pip3 install selenium
 	pip3 install webdriver_manager
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
-	cd ..
+	cd /content/
 }
 
 INSTALL_YTDLP(){
