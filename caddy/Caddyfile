@@ -18,7 +18,9 @@
         }
         # Configure qbittorrent
 	handle /home/qbit* {
-		reverse_proxy /home/qbit* localhost:61804
+                redir /home/qbit /home/qbit/
+                uri strip_prefix /home/qbit
+                reverse_proxy * localhost:61804
 	}
 	# Configure Filebrowser
 	handle /home/files* {
