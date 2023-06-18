@@ -24,7 +24,9 @@
 	}
 	# Configure Filebrowser
 	handle /home/files* {
-		reverse_proxy /home/files* localhost:61801
+                redir /home/files /home/files/
+                uri strip_prefix /home/files
+                reverse_proxy * localhost:61801
 	}
         # Configure homer
         handle * {
