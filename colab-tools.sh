@@ -80,7 +80,7 @@ INSTALL_TOOLS(){
 	cd /content/tools
 	mkdir jdownloader
 	cd jdownloader
-	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/move_downloads.py"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/jdownload_to_rclone.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/terminate_backup.sh"
 	cd /content/
