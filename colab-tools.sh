@@ -122,14 +122,13 @@ INSTALL_CADDY(){
 	chmod 777 /content/tools/qBittorrent/qbittorrent-nox
 	mkdir "/root/.config/qBittorent"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorent/qBittorrent.conf"
-	exec /content/tools/qBittorrent/qbittorrent-nox
+	nohup exec /content/tools/qBittorrent/qbittorrent-nox > /content/logs/qbittorent.log 2>&1 &
 }
 
-cd /content/
 INSTALL_TOOLS
-INSTALL_CADDY
 INSTALL_CLOUDFLARED
 INSTALL_DOWNLOADERS
+INSTALL_CADDY
 
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
