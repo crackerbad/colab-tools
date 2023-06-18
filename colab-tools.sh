@@ -121,8 +121,8 @@ INSTALL_QBITTORRENT() {
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/restart_qbit.sh" -O /content/tools/qbittorrent/restart_qbit.sh
 	wget -q "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/qb_dark.zip" -O /tmp/qb_dark.zip && 7z x /tmp/qb_dark.zip -o/content/tools/qbittorrent/ && rm /tmp/qb_dark.zip
 	rm -r /content/tools/qbittorrent/__MACOSX/
-	mkdir /root/.local/share/qBittorrent/
-	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.local/share/qBittorrent/qBittorrent.conf"
+	mkdir /root/.config/qBittorrent/
+	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
 	sudo apt-get -y install qbittorrent-nox
 	#run qbitttorent
 	nohup qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
