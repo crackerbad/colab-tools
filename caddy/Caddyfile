@@ -25,6 +25,19 @@
                         header_up Host "127.0.0.1:61804"
                 }
         }
+        # Configure Vuetorrent   
+	handle {/home/vue* {
+		redir /home/vue /home/vue/
+		uri strip_prefix /home/vue
+		handle /api* {
+			reverse_proxy * {
+				to localhost:61804
+				header_up Host "127.0.0.1:61804"
+			}
+		}
+		root * /content/tools/qbittorent/vuetorrent/public
+		file_server
+	}
 	# Configure Filebrowser
 	handle /home/files* {
 		reverse_proxy /home/files* localhost:61801
