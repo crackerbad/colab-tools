@@ -22,7 +22,7 @@ pasta_origem = "/content/downloads/jd2_downloads"
 pasta_destino = args.output
 
 # Extensões de arquivo a serem ignoradas
-extensoes_ignoradas = [".rar", ".7z", ".zip", ".part", ".encrypted", ".py", ".sh"]
+extensoes_ignoradas = [".rar", ".7z", ".zip", ".part", ".encrypted", ".py", ".sh", ".ts"]
 
 # Dicionário para rastrear os tamanhos dos arquivos
 tamanhos_arquivos = {}
