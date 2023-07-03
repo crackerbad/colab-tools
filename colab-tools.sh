@@ -14,7 +14,7 @@ INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.0/multi-downloader-nx-ubuntu-gui.7z"
+	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.4/multi-downloader-nx-ubuntu-gui.7z"
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
@@ -111,8 +111,6 @@ INSTALL_CADDY(){
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip && rm homer.zip
-	#rm "/content/homer/assets/config.yml"
-	#wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/config.yml" -O "/content/homer/assets/config.yml"
 }
 
 INSTALL_QBITTORRENT() {
@@ -150,9 +148,9 @@ if [ "${ODRIVE_INSTALL}" = "Enable" ]; then
 fi
 
 INSTALL_QBITTORRENT
-INSTALL_TOOLS &
-INSTALL_CLOUDFLARED &
-INSTALL_DOWNLOADERS &
+INSTALL_TOOLS
+INSTALL_CLOUDFLARED
+INSTALL_DOWNLOADERS
 INSTALL_CADDY
 
 echo Instalação Finalizada
