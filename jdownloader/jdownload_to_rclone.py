@@ -62,6 +62,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
                 if tamanho_anterior is not None and tamanho_atual == tamanho_anterior:
                     random_number = generate_random_service_account_number()
                     service_account_file = generate_service_account_filepath(random_number)
+                    time.sleep(2)
                     # O tamanho do arquivo permaneceu o mesmo, prosseguir com a movimentação
                     subprocess.run(['rclone', 
                                     'copy', 
