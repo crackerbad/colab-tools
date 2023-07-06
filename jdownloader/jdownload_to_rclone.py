@@ -3,6 +3,7 @@ import argparse
 import subprocess
 import time
 import random
+import psutil
 
 def generate_random_service_account_number():
     random_number = random.randint(1, 50)
@@ -36,13 +37,18 @@ def verificar_modificacao_arquivos(caminho_pasta):
     for pasta_atual, subpastas, arquivos in os.walk(caminho_pasta):
         for arquivo in arquivos:
             caminho_arquivo = os.path.join(pasta_atual, arquivo)
-            tamanho_atual = obter_tamanho_arquivo(caminho_arquivo)
-            tamanho_anterior = tamanhos_arquivos.get(caminho_arquivo)
-            if tamanho_anterior is not None and tamanho_atual != tamanho_anterior:
-                return True
-            tamanhos_arquivos[caminho_arquivo] = tamanho_atual
+            
+            # Verificar se o arquivo está em uso por algum processo
+            for proc in psutil.process_iter(['name']):
+                try:
+                    arquivos_abertos = proc.open_files()
+                    for arquivo_aberto in arquivos_abertos:
+                        if arquivo_aberto.path == caminho_arquivo:
+                            return True
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+    
     return False
-
 
 def mover_arquivos(pasta_origem, pasta_destino):
     for pasta_atual, subpastas, arquivos in os.walk(pasta_origem):
@@ -71,6 +77,8 @@ def mover_arquivos(pasta_origem, pasta_destino):
                                     '--drive-chunk-size', 
                                     '128M', 
                                     f"--drive-service-account-file={service_account_file}", 
+                                    '--retries', 
+                                    '100', 
                                     "--log-file=/content/logs/rclone_jdownloader.log"])
 
                     # Após a cópia, excluir o arquivo da origem
