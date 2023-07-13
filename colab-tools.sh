@@ -69,9 +69,13 @@ INSTALL_TOOLS(){
 	#ffmpeg
 	sudo apt-get install ffmpeg -y
 	#rename for rename files
-	sudo apt-get install rename
+	sudo apt-get install rename -y
 	#mkvtoolnix
 	sudo apt-get install mkvtoolnix -y
+	#crc32 calculator
+	sudo apt-get install libarchive-zip-perl -y
+	#timeoutbypass
+	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/timeout_bypass.sh" -O /content/tools/timeout_bypass.sh
 	#Croc Send files
 	curl https://getcroc.schollz.com | bash
 	#Install ttyd & nano
@@ -83,6 +87,7 @@ INSTALL_TOOLS(){
 	cd /content/tools
 	mkdir jdownloader
 	cd jdownloader
+	pip install psutil
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/jdownload_to_rclone.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/terminate_backup.sh"
