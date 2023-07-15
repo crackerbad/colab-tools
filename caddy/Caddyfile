@@ -37,7 +37,7 @@
         }
 }
 
-:3030
+localhost:3030
 {
         handle * {
           reverse_proxy localhost:3000
