@@ -15,6 +15,7 @@ INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/4.2.0/multi-downloader-nx-ubuntu-gui.7z"
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
@@ -24,9 +25,6 @@ INSTALL_CRDOWNLOADER(){
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.6f845bae.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
-	nohup argo tunnel --url localhost:3030 > /content/logs/aniDL_tunnel.log 2>&1 &
-	CRURL=$(grep -oh "https://\(.*\)trycloudflare.com" /content/logs/aniDL_tunnel.log)
-	sed -i "s|CRUNCHYROLL_URL|${CRURL}|" /content/tools/homer/assets/config.yml
 	cd "/content/"
 }
 
