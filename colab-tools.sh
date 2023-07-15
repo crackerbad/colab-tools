@@ -14,11 +14,11 @@ INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/3.4.4/multi-downloader-nx-ubuntu-gui.7z"
+	wget "https://github.com/anidl/multi-downloader-nx/releases/download/4.2.0/multi-downloader-nx-ubuntu-gui.7z"
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1105185019846201394/config.zip"
+	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1129843918465401002/config.zip"
 	unzip config.zip && rm config.zip
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
