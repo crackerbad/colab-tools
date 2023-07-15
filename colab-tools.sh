@@ -7,7 +7,7 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
 sudo apt-get update
 mkdir "tools"
 mkdir "logs"
-mkdir "/content/downloads/jd2_downloads"
+mkdir -p "/content/downloads/jd2_downloads"
 rm -r /content/sample_data
 sudo apt-get -y install busybox
 
