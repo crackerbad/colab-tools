@@ -24,6 +24,9 @@ INSTALL_CRDOWNLOADER(){
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.6f845bae.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
+	nohup argo tunnel --url localhost:3030 > /content/logs/aniDL_tunnel.log 2>&1 &
+	CRURL=$(grep -oh "https://\(.*\)trycloudflare.com" /content/logs/aniDL_tunnel.log)
+	sed -i "s|CRUNCHYROLL_URL|${CRURL}|" /content/tools/homer/assets/config.yml
 	cd "/content/"
 }
 
@@ -135,10 +138,11 @@ INSTALL_QBITTORRENT() {
 }
 
 
-# Install Crunchyroll-Downloader
-if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
-	INSTALL_CRDOWNLOADER &
-fi
+INSTALL_QBITTORRENT
+INSTALL_TOOLS
+INSTALL_CLOUDFLARED
+INSTALL_DOWNLOADERS
+INSTALL_CADDY
 
 # Install MEGA
 if [ "${MEGA_INSTALL}" = "Enable" ]; then
@@ -147,19 +151,18 @@ fi
 
 # Install Youtube-DLP
 if [ "${YTDLP_INSTALL}" = "Enable" ]; then
-	INSTALL_YTDLP &
+	INSTALL_YTDLP
 fi
 
 # Install Odrive
 if [ "${ODRIVE_INSTALL}" = "Enable" ]; then
-	INSTALL_ODRIVE &
+	INSTALL_ODRIVE
 fi
 
-INSTALL_QBITTORRENT
-INSTALL_TOOLS
-INSTALL_CLOUDFLARED
-INSTALL_DOWNLOADERS
-INSTALL_CADDY
+# Install Crunchyroll-Downloader
+if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
+	INSTALL_CRDOWNLOADER
+fi
 
 echo Instalação Finalizada
 
