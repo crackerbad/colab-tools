@@ -37,8 +37,15 @@
         }
 }
 
-127.0.0.1:3030
+:3030
 {
+        encode gzip
+        # Force HTTPS
+        @http-req {
+                header X-Forwarded-Proto http
+        }
+        redir @http-req https://{host}{uri}
+
         handle * {
           reverse_proxy localhost:3000
         }
