@@ -7,6 +7,7 @@ sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
 sudo apt-get update
 mkdir "tools"
 mkdir "logs"
+mkdir "/content/downloads/jd2_downloads"
 rm -r /content/sample_data
 sudo apt-get -y install busybox
 
@@ -20,6 +21,8 @@ INSTALL_CRDOWNLOADER(){
 	rm -r config
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1129843918465401002/config.zip"
 	unzip config.zip && rm config.zip
+	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.6f845bae.js
+	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
