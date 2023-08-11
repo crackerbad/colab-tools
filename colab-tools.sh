@@ -22,7 +22,7 @@ INSTALL_CRDOWNLOADER(){
 	rm -r config
 	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1129843918465401002/config.zip"
 	unzip config.zip && rm config.zip
-	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.6f845bae.js
+	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.931f8e1b.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
