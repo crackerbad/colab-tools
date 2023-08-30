@@ -136,6 +136,7 @@ INSTALL_QBITTORRENT() {
 }
 
 INSTALL_MAKEMKV() {
+	echo "Instalando MakeMKV"
 	# Instala as dependências necessárias
 	sudo apt-get update
 	sudo apt-get install -y build-essential pkg-config libc6-dev libssl-dev libexpat1-dev libavcodec-dev libgl1-mesa-dev qtbase5-dev zlib1g-dev
