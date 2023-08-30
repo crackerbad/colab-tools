@@ -135,6 +135,25 @@ INSTALL_QBITTORRENT() {
 	nohup qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
 }
 
+INSTALL_MAKEMKV() {
+	# Instala as dependências necessárias
+	sudo apt-get update
+	sudo apt-get install -y build-essential pkg-config libc6-dev libssl-dev libexpat1-dev libavcodec-dev libgl1-mesa-dev qtbase5-dev zlib1g-dev
+
+	# Baixar e descompactar o arquivo do aplicativo
+	wget https://www.makemkv.com/download/makemkv-oss-1.17.4.tar.gz
+	tar xvzf makemkv-oss-1.17.4.tar.gz
+	cd makemkv-oss-1.17.4
+
+	# Configurar e compilar o aplicativo
+	./configure
+	make
+
+	# Instalar o aplicativo
+	sudo make install
+
+	echo "Instalação do MakeMKV concluída com sucesso."
+}
 
 INSTALL_QBITTORRENT
 INSTALL_TOOLS
@@ -160,6 +179,11 @@ fi
 # Install Crunchyroll-Downloader
 if [ "${CRDOWNLOADER_INSTALL}" = "Enable" ]; then
 	INSTALL_CRDOWNLOADER
+fi
+
+# Install MAKEMKV
+if [ "${MAKEMKV_INSTALL}" = "Enable" ]; then
+	INSTALL_MAKEMKV
 fi
 
 echo Instalação Finalizada
