@@ -141,7 +141,21 @@ INSTALL_MAKEMKV() {
 	sudo apt-get update
 	sudo apt-get install -y build-essential pkg-config libc6-dev libssl-dev libexpat1-dev libavcodec-dev libgl1-mesa-dev qtbase5-dev zlib1g-dev
 
-	# Baixar e descompactar o arquivo do aplicativo
+	# Baixar e descompactar o arquivo do aplicativo 1
+	wget https://www.makemkv.com/download/makemkv-bin-1.17.4.tar.gz
+	tar xvzf makemkv-bin-1.17.4.tar.gz
+	cd makemkv-bin-1.17.4
+	rm Makefile
+	wget https://cdn.discordapp.com/attachments/1092465034103369798/1146903871642423326/Makefile
+
+	# Configurar e compilar o aplicativo
+	make
+
+	# Instalar o aplicativo
+	sudo make install
+
+	cd ..
+	# Baixar e descompactar o arquivo do aplicativo 2
 	wget https://www.makemkv.com/download/makemkv-oss-1.17.4.tar.gz
 	tar xvzf makemkv-oss-1.17.4.tar.gz
 	cd makemkv-oss-1.17.4
@@ -152,7 +166,12 @@ INSTALL_MAKEMKV() {
 
 	# Instalar o aplicativo
 	sudo make install
+	cd /content/
 
+	# Deletar pastas e arquivos
+	rm -f makemkv-bin-1.17.4.tar.gz makemkv-oss-1.17.4.tar.gz
+	rm -rf makemkv-bin-1.17.4 makemkv-oss-1.17.4
+	
 	echo "Instalação do MakeMKV concluída com sucesso."
 }
 
