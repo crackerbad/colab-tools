@@ -47,6 +47,7 @@ INSTALL_DOWNLOADERS(){
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/nextcloud/nextcloud_share_url_downloader.sh -O nextcloud/nextcloud_share_url_downloader.sh
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/colab-index-downloader.py
+	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/onedrive_index.py
 	cd /content/
 }
 
@@ -175,11 +176,16 @@ INSTALL_MAKEMKV() {
 	echo "Instalação do MakeMKV concluída com sucesso."
 }
 
-INSTALL_QBITTORRENT
+
 INSTALL_TOOLS
-INSTALL_CLOUDFLARED
 INSTALL_DOWNLOADERS
-INSTALL_CADDY
+
+# Install MEGA
+if [ "${GUI_INSTALL}" = "Enable" ]; then
+	INSTALL_CADDY
+	INSTALL_QBITTORRENT
+	INSTALL_CLOUDFLARED
+fi
 
 # Install MEGA
 if [ "${MEGA_INSTALL}" = "Enable" ]; then
