@@ -87,7 +87,7 @@ INSTALL_TOOLS(){
 	sudo apt-get install nano -y
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
-	nohup ttyd -W -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
+	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
 	#jdownloader scripts
 	cd /content/tools
 	mkdir jdownloader
