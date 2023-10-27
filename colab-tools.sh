@@ -20,7 +20,7 @@ INSTALL_CRDOWNLOADER(){
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1160632669474926754/config.zip"
+	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1167553635354411059/config.zip"
 	unzip config.zip && rm config.zip
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.931f8e1b.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
@@ -87,7 +87,7 @@ INSTALL_TOOLS(){
 	sudo apt-get install nano -y
 	wget -qO /usr/bin/ttyd https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.x86_64
 	chmod +x /usr/bin/ttyd
-	nohup ttyd -W -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
+	nohup ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 bash > /content/logs/ttyd.log 2>&1 &
 	#jdownloader scripts
 	cd /content/tools
 	mkdir jdownloader
