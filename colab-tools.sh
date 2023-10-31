@@ -10,6 +10,7 @@ mkdir "logs"
 mkdir -p "/content/downloads/jd2_downloads"
 rm -r /content/sample_data
 sudo apt-get -y install busybox
+pip install ipywidgets
 
 INSTALL_CRDOWNLOADER(){
 	cd /content/tools
@@ -59,6 +60,7 @@ INSTALL_ODRIVE(){
 	pip3 install webdriver_manager
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
 	cd /content/
+	#onedrive
 }
 
 INSTALL_YTDLP(){
