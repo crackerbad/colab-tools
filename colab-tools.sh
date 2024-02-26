@@ -21,7 +21,7 @@ INSTALL_CRDOWNLOADER(){
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget -O config.zip "https://cdn.discordapp.com/attachments/1092465034103369798/1129843918465401002/config.zip?ex=65ecac25&is=65da3725&hm=2577258f8b07d4617f9e4afe7592a4b1ea300190fa7f16bba2076159699434ee&"
+	wget -O config.zip "https://cdn.discordapp.com/attachments/1092465034103369798/1175901694425583696/config.zip?ex=65ee1dcb&is=65dba8cb&hm=b9637f14c46c28bae74feabea214051105da9ef0c160a771724aa34a143aa9bf&"
 	unzip config.zip && rm config.zip
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.931f8e1b.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
