@@ -21,7 +21,7 @@ INSTALL_CRDOWNLOADER(){
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget "https://cdn.discordapp.com/attachments/1092465034103369798/1175901694425583696/config.zip"
+	wget -O config.zip "https://cdn.discordapp.com/attachments/1092465034103369798/1129843918465401002/config.zip?ex=65ecac25&is=65da3725&hm=2577258f8b07d4617f9e4afe7592a4b1ea300190fa7f16bba2076159699434ee&"
 	unzip config.zip && rm config.zip
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.931f8e1b.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
@@ -149,7 +149,7 @@ INSTALL_MAKEMKV() {
 	tar xvzf makemkv-bin-1.17.4.tar.gz
 	cd makemkv-bin-1.17.4
 	rm Makefile
-	wget https://cdn.discordapp.com/attachments/1092465034103369798/1146903871642423326/Makefile
+	wget -O Makefile "https://cdn.discordapp.com/attachments/1092465034103369798/1146903871642423326/Makefile?ex=65ea22f7&is=65d7adf7&hm=0e97b5fe7ff2f736f07280700f04d5d8856b35f14870e1538aff37dc44e5d2f7&"
 
 	# Configurar e compilar o aplicativo
 	make
