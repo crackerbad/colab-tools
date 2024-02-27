@@ -21,7 +21,7 @@ INSTALL_CRDOWNLOADER(){
 	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
-	wget -O config.zip "https://cdn.discordapp.com/attachments/1092465034103369798/1175901694425583696/config.zip?ex=65ee1dcb&is=65dba8cb&hm=b9637f14c46c28bae74feabea214051105da9ef0c160a771724aa34a143aa9bf&"
+	wget -O config.zip "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/cr_config.zip"
 	unzip config.zip && rm config.zip
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.931f8e1b.js
 	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.f2771850.js
@@ -145,11 +145,11 @@ INSTALL_MAKEMKV() {
 	sudo apt-get install -y build-essential pkg-config libc6-dev libssl-dev libexpat1-dev libavcodec-dev libgl1-mesa-dev qtbase5-dev zlib1g-dev
 
 	# Baixar e descompactar o arquivo do aplicativo 1
-	wget https://www.makemkv.com/download/makemkv-bin-1.17.4.tar.gz
-	tar xvzf makemkv-bin-1.17.4.tar.gz
-	cd makemkv-bin-1.17.4
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv-bin-1.17.6.tar.gz
+	tar xvzf makemkv-bin-1.17.6.tar.gz
+	cd makemkv-bin-1.17.6
 	rm Makefile
-	wget -O Makefile "https://cdn.discordapp.com/attachments/1092465034103369798/1146903871642423326/Makefile?ex=65ea22f7&is=65d7adf7&hm=0e97b5fe7ff2f736f07280700f04d5d8856b35f14870e1538aff37dc44e5d2f7&"
+	wget -O Makefile "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/Makefile"
 
 	# Configurar e compilar o aplicativo
 	make
@@ -159,9 +159,9 @@ INSTALL_MAKEMKV() {
 
 	cd ..
 	# Baixar e descompactar o arquivo do aplicativo 2
-	wget https://www.makemkv.com/download/makemkv-oss-1.17.4.tar.gz
-	tar xvzf makemkv-oss-1.17.4.tar.gz
-	cd makemkv-oss-1.17.4
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv-oss-1.17.6.tar.gz
+	tar xvzf makemkv-oss-1.17.6.tar.gz
+	cd makemkv-oss-1.17.6
 
 	# Configurar e compilar o aplicativo
 	./configure
@@ -172,8 +172,8 @@ INSTALL_MAKEMKV() {
 	cd /content/
 
 	# Deletar pastas e arquivos
-	rm -f makemkv-bin-1.17.4.tar.gz makemkv-oss-1.17.4.tar.gz
-	rm -rf makemkv-bin-1.17.4 makemkv-oss-1.17.4
+	rm -f makemkv-bin-1.17.6.tar.gz makemkv-oss-1.17.6.tar.gz
+	rm -rf makemkv-bin-1.17.6 makemkv-oss-1.17.6
 	
 	echo "Instalação do MakeMKV concluída com sucesso."
 }
