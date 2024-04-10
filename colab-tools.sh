@@ -18,8 +18,9 @@ INSTALL_CRDOWNLOADER(){
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
 	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v4.6.3/multi-downloader-nx-linux-gui.7z"
-	7z x "multi-downloader-nx-ubuntu-gui.7z" && rm multi-downloader-nx-ubuntu-gui.7z
-	cd "multi-downloader-nx-ubuntu64-gui"
+	7z x "multi-downloader-nx-linux-gui.7z" && rm multi-downloader-nx-linux-gui.7z
+	mv "multi-downloader-nx-linux-x64-gui" "multi-downloader-nx-ubuntu-gui"
+	cd "multi-downloader-nx-ubuntu-gui"
 	rm -r config
 	wget -O config.zip "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/cr_config.zip"
 	unzip config.zip && rm config.zip
