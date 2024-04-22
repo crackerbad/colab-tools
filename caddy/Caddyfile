@@ -39,6 +39,6 @@
 
 :3030
 {
-    tls self_signed
-    reverse_proxy /ws http://localhost:3000
+        tls self_signed
+        reverse_proxy /ws http://localhost:3000
 }
