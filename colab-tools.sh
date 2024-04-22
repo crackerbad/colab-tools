@@ -12,12 +12,6 @@ rm -r /content/sample_data
 sudo apt-get -y install busybox
 pip install ipywidgets
 
-#OPEN-SSL
-sudo apt-get install -y openssl
-wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/OpenSSL.cnf" -O "/content/tools/caddy/OpenSSL.cnf"
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/content/tools/caddy/localhost.key" -out "/content/tools/caddy/localhost.crt" -config "/content/tools/caddy/OpenSSL.cnf"
-
-
 INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
@@ -116,6 +110,14 @@ INSTALL_MEGA(){
 }
 
 INSTALL_CADDY(){
+	#OPEN-SSL
+	echo "Instalando openssl."
+	sudo apt-get install openssl -y
+	echo "baixando configuração do certificado."
+	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/OpenSSL.cnf" -O "/content/tools/caddy/OpenSSL.cnf"
+	echo "Gerando certificado..."
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/content/tools/caddy/localhost.key" -out "/content/tools/caddy/localhost.crt" -config "/content/tools/caddy/OpenSSL.cnf"
+
 	#caddy
 	wget -qO /usr/bin/caddy "https://caddyserver.com/api/download?os=linux&arch=amd64"
 	chmod +x /usr/bin/caddy
