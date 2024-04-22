@@ -112,12 +112,12 @@ INSTALL_MEGA(){
 INSTALL_CADDY(){
 	mkdir -p "/content/tools/caddy"
 	#OPEN-SSL
-	echo "Instalando openssl."
-	sudo apt-get install openssl -y
-	echo "baixando configuração do certificado."
-	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/OpenSSL.cnf" -O "/content/tools/caddy/OpenSSL.cnf"
-	echo "Gerando certificado..."
-	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/content/tools/caddy/localhost.key" -out "/content/tools/caddy/localhost.crt" -config "/content/tools/caddy/OpenSSL.cnf"
+	#echo "Instalando openssl."
+	#sudo apt-get install openssl -y
+	#echo "baixando configuração do certificado."
+	#wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/OpenSSL.cnf" -O "/content/tools/caddy/OpenSSL.cnf"
+	#echo "Gerando certificado..."
+	#openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/content/tools/caddy/localhost.key" -out "/content/tools/caddy/localhost.crt" -config "/content/tools/caddy/OpenSSL.cnf"
 	#caddy
 	wget -qO /usr/bin/caddy "https://caddyserver.com/api/download?os=linux&arch=amd64"
 	chmod +x /usr/bin/caddy
