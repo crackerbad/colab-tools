@@ -17,7 +17,7 @@ INSTALL_CRDOWNLOADER(){
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v4.6.3/multi-downloader-nx-linux-gui.7z"
+	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v5.0.0/multi-downloader-nx-linux-gui.7z"
 	7z x "multi-downloader-nx-linux-gui.7z" && rm multi-downloader-nx-linux-gui.7z
 	mv "multi-downloader-nx-linux-x64-gui" "multi-downloader-nx-ubuntu64-gui"
 	cd "multi-downloader-nx-ubuntu64-gui"
@@ -123,6 +123,11 @@ INSTALL_CADDY(){
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip && rm homer.zip
+	#OPEN-SSL
+	sudo apt-get install -y openssl
+	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/caddy/OpenSSL.cnf" -O "/content/tools/caddy/OpenSSL.cnf"
+	cert_dir="/content/tools/caddy"
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "$cert_dir/localhost.key" -out "$cert_dir/localhost.crt" -config "$cert_dir/OpenSSL.cnf"
 }
 
 INSTALL_QBITTORRENT() {
