@@ -37,16 +37,17 @@
         }
 }
 
-:3030 {
-    tls /content/tools/caddy/localhost.crt /content/tools/caddy/localhost.key
-    encode gzip
+:3030
+{
+        encode gzip
+        # Force HTTPS
+        @http-req {
+                header X-Forwarded-Proto http
+        }
+        redir @http-req https://{host}{uri}
 
-    @ws {
-        path /ws
-        header Connection *Upgrade*
-        header Upgrade websocket
-    }
+        handle * {
+          reverse_proxy localhost:3000
+        }
 
-    reverse_proxy @ws localhost:3000
-    reverse_proxy localhost:3000
 }
