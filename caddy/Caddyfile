@@ -22,6 +22,12 @@
                 uri strip_prefix /home/qbit
                 reverse_proxy * localhost:61804
 	}
+        # Configure crunchyroll
+	handle /home/cr* {
+                redir /home/cr /home/cr/
+                uri strip_prefix /home/cr
+                reverse_proxy * localhost:3000
+	}
 	# Configure Filebrowser
 	handle /home/files* {
                 redir /home/files /home/files/
@@ -35,19 +41,4 @@
                 root * /content/homer
                 file_server
         }
-}
-
-:3030
-{
-        encode gzip
-        # Force HTTPS
-        @http-req {
-                header X-Forwarded-Proto http
-        }
-        redir @http-req https://{host}{uri}
-
-        handle * {
-          reverse_proxy localhost:3000
-        }
-
 }
