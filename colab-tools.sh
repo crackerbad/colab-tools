@@ -17,14 +17,14 @@ INSTALL_CRDOWNLOADER(){
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v5.0.0/multi-downloader-nx-linux-gui.7z"
+	wget "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/multi-downloader-nx-linux-x64-gui.7z"
 	7z x "multi-downloader-nx-linux-gui.7z" && rm multi-downloader-nx-linux-gui.7z
 	mv "multi-downloader-nx-linux-x64-gui" "multi-downloader-nx-ubuntu64-gui"
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
 	wget -O config.zip "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/cr_config.zip"
 	unzip config.zip && rm config.zip
-	sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.77156914.js
+	#sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.77156914.js
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
