@@ -49,6 +49,7 @@ INSTALL_DOWNLOADERS(){
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/colab-index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/onedrive_index.py
+	wget https://github.com/crackerbad/colab-tools/raw/main/nextcloud/anitsu-downloader-linux.py
 	cd /content/
 }
 
@@ -63,7 +64,9 @@ INSTALL_ODRIVE(){
 
 	"""
 	#onedrive
-	git clone https://github.com/crackerbad/pySharepointDownloader
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/pySharepointDownloader.zip
+	unzip pySharepointDownloader.zip
+	rm pySharepointDownloader.zip
 	cd /content/
 }
 
