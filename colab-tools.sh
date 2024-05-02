@@ -54,13 +54,17 @@ INSTALL_DOWNLOADERS(){
 
 INSTALL_ODRIVE(){
 	cd /content/tools
+	"""
 	git clone https://github.com/crackerbad/odrive
 	pip3 install -r odrive/requirements.txt
 	pip3 install selenium
 	pip3 install webdriver_manager
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/odrive/odrive-downloader.sh -O odrive/odrive-downloader.sh
-	cd /content/
+
+	"""
 	#onedrive
+	git clone https://github.com/crackerbad/pySharepointDownloader
+	cd /content/
 }
 
 INSTALL_YTDLP(){
