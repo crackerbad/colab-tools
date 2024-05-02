@@ -49,7 +49,7 @@ INSTALL_DOWNLOADERS(){
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/colab-index-downloader.py
 	wget https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/onedrive_index.py
-	wget https://github.com/crackerbad/colab-tools/raw/main/nextcloud/anitsu-downloader-linux.py
+	wget https://github.com/crackerbad/colab-tools/raw/main/nextcloud/anitsu-downloader-linux.py -O nextcloud/anitsu-downloader-linux.py
 	cd /content/
 }
 
