@@ -3,7 +3,7 @@ source /etc/env
 
 #qbittorrent repo
 sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
-
+sudo apt-get install python3-venv
 sudo apt-get update
 mkdir "tools"
 mkdir "logs"
