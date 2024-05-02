@@ -96,7 +96,7 @@ def download_content(url):
             "anitsu:" + decoded_folder_name,  # Caminho de origem
             "./" + target_folder_name,  # Caminho de destino
             "--no-check-certificate",  # Desativa a verificação do certificado TLS
-            "--transfers", "1",  # Limite de 1 transferência simultânea
+            "--transfers", "4",  # Limite de 1 transferência simultânea
             "--local-no-sparse",  # Não use sparse files localmente
             "-vP"   # Verifica o progresso de transferência
         ]
