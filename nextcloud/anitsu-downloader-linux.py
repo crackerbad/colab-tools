@@ -24,33 +24,7 @@ def extract_webdav_url(url):
         return base_url_match.group(1) + "/public.php/webdav/"
     else:
         raise ValueError("URL inválida!")
-
-def should_skip_download(folder_name):
-    # Lista de palavras proibidas nos diretórios
-    forbidden_words = ["Desenhos", "Quadrinhos", "Séries", "#TEMP", "0-9", "Letra"]
-    
-    # Decodifica o nome da pasta para torná-lo legível
-    decoded_folder_name = decode_folder_name(folder_name)
-    
-    # Verifica se o nome da pasta está vazio ou é a raiz
-    if not decoded_folder_name or decoded_folder_name == "/":
-        return True
-    
-    # Obtém o nome da última subpasta
-    subfolders = decoded_folder_name.split("/")
-    last_folder_name = subfolders[-1] if subfolders[-1] else subfolders[-2]  # Se a última subpasta for vazia, pegue a anterior
-    
-    # Remove barras extras e codificação
-    last_folder_name_stripped = last_folder_name.replace("%2F", "/")
-    
-    # Verifica se o nome da última subpasta contém a palavra "Animes"
-    if last_folder_name_stripped == "Animes":
-        return True
-    
-    # Verifica se o nome da última subpasta contém alguma palavra proibida
-    return any(word in last_folder_name_stripped for word in forbidden_words)
-
-
+        
 def check_rclone_availability():
     # Verifica se o rclone está disponível
     try:
@@ -66,10 +40,6 @@ def download_content(url):
         
         # Extrai a URL base do WebDAV da URL
         webdav_base_url = extract_webdav_url(url)
-
-        # Verifica se devemos pular o download
-        if should_skip_download(folder_name):
-            raise ValueError("Diretório proibido. O download será ignorado.")
 
         # Cria a configuração WebDAV com rclone
         config_command = [
