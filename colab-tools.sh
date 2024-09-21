@@ -102,6 +102,7 @@ INSTALL_TOOLS(){
 	mkdir jdownloader
 	cd jdownloader
 	pip install psutil
+	wget "https://github.com/crackerbad/colab-tools/raw/refs/heads/main/jdownloader/jdownloader_installer.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/jdownload_to_rclone.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/terminate_backup.sh"
