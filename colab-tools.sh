@@ -3,6 +3,8 @@ source /etc/env
 
 #qbittorrent repo
 sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
+sudo -S add-apt-repository -y ppa:poplite/qbittorrent-enhanced
+
 sudo apt-get install python3-venv -y
 sudo apt-get update
 mkdir "tools"
@@ -135,7 +137,7 @@ INSTALL_CADDY(){
 	#filebrowser
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/filebrowser.db" -O "/content/tools/caddy/filebrowser.db"
 	curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
-	nohup filebrowser -d "/content/tools/caddy/filebrowser.db" -r /content/ -b /home/files -p 61801 > /content/logs/filebrowser.log 2>&1 &
+	nohup filebrowser --noauth -d "/content/tools/caddy/filebrowser.db" -r /content/ -b /home/files -p 61801 > /content/logs/filebrowser.log 2>&1 &
 	#homer
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/homer.zip"
 	unzip homer.zip && rm homer.zip
@@ -149,9 +151,10 @@ INSTALL_QBITTORRENT() {
 	rm -r /content/tools/qbittorrent/__MACOSX/
 	mkdir /root/.config/qBittorrent/
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
-	sudo apt-get -y install qbittorrent-nox
+	sudo apt-get -y install qbittorrent-enhanced-nox
 	#run qbitttorent
-	nohup qbittorrent-nox > /content/logs/qbittorrent.log 2>&1 &
+	sudo service qbittorrent-enhanced-nox start
+	#nohup qbittorrent-enhanced-nox > /content/logs/qbittorrent.log 2>&1 &
 }
 
 INSTALL_MAKEMKV() {
@@ -201,7 +204,7 @@ INSTALL_DOWNLOADERS
 # Install MEGA
 if [ "${GUI_INSTALL}" = "Enable" ]; then
 	INSTALL_CADDY
-	#INSTALL_QBITTORRENT
+	INSTALL_QBITTORRENT
 	INSTALL_CLOUDFLARED
 fi
 
