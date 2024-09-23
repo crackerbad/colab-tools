@@ -1,9 +1,6 @@
 #!/bin/sh
 source /etc/env
 
-#qbittorrent repo
-sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
-
 sudo apt-get install python3-venv -y
 sudo apt-get update
 mkdir "tools"
@@ -150,10 +147,11 @@ INSTALL_QBITTORRENT() {
 	rm -r /content/tools/qbittorrent/__MACOSX/
 	mkdir /root/.config/qBittorrent/
 	wget "https://github.com/crackerbad/colab-tools/raw/main/caddy/qBittorrent.conf" -O "/root/.config/qBittorrent/qBittorrent.conf"
-	#sudo apt-get -y install qbittorrent-nox
-	sudo mv /usr/bin/qbittorrent-nox /usr/bin/qbittorrent-fox
+	mkdir -p ~/bin && source ~/.profile
+	wget -qO ~/bin/qbittorresmo https://github.com/userdocs/qbittorrent-nox-static/releases/latest/download/x86_64-qbittorrent-nox
+	chmod 700 ~/bin/qbittorresmo
 	#run qbitttorent
-	#nohup qbittorrent-fox > /content/logs/qbittorrent.log 2>&1 &
+	nohup ~/bin/qbittorresmo > /content/logs/qbittorrent.log 2>&1 &
 }
 
 INSTALL_MAKEMKV() {
