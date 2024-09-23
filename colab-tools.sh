@@ -15,14 +15,17 @@ INSTALL_CRDOWNLOADER(){
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v5.1.0/multi-downloader-nx-linux-gui.7z" -O "multi-downloader-nx-linux-gui.7z"
+	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v5.1.5/multi-downloader-nx-linux-gui.7z" -O "multi-downloader-nx-linux-gui.7z"
 	7z x "multi-downloader-nx-linux-gui.7z" && rm multi-downloader-nx-linux-gui.7z
 	mv "multi-downloader-nx-linux-x64-gui" "multi-downloader-nx-ubuntu64-gui"
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
+	rm -r widevine
 	wget -O config.zip "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/cr_config.zip"
 	unzip config.zip && rm config.zip
 	#sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.77156914.js
+	sudo wget "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/mp4decrypt" -O /usr/local/bin/mp4decrypt
+	sudo chmod +x /usr/local/bin/mp4decrypt
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
@@ -161,11 +164,11 @@ INSTALL_MAKEMKV() {
 	sudo apt-get install -y build-essential pkg-config libc6-dev libssl-dev libexpat1-dev libavcodec-dev libgl1-mesa-dev qtbase5-dev zlib1g-dev
 
 	# Baixar e descompactar o arquivo do aplicativo 1
-	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv-bin-1.17.6.tar.gz
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv/makemkv-bin-1.17.6.tar.gz
 	tar xvzf makemkv-bin-1.17.6.tar.gz
 	cd makemkv-bin-1.17.6
 	rm Makefile
-	wget -O Makefile "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/Makefile"
+	wget -O Makefile "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv/Makefile"
 
 	# Configurar e compilar o aplicativo
 	make
@@ -175,7 +178,7 @@ INSTALL_MAKEMKV() {
 
 	cd ..
 	# Baixar e descompactar o arquivo do aplicativo 2
-	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv-oss-1.17.6.tar.gz
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/makemkv/makemkv-oss-1.17.6.tar.gz
 	tar xvzf makemkv-oss-1.17.6.tar.gz
 	cd makemkv-oss-1.17.6
 
