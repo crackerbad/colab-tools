@@ -204,8 +204,11 @@ INSTALL_DOWNLOADERS
 # Install MEGA
 if [ "${GUI_INSTALL}" = "Enable" ]; then
 	INSTALL_CADDY
-	INSTALL_QBITTORRENT
 	INSTALL_CLOUDFLARED
+fi
+
+if [ "${QBIT_INSTALL}" = "Enable" ]; then
+	INSTALL_QBITTORRENT
 fi
 
 # Install MEGA
