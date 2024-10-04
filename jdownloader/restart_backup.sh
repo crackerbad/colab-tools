@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nome do script Python a ser encerrado
-nome_script="jdownload_to_rclone.py"
+nome_script="jdownload_to_cyclone.py"
 
 
 # Obtém o PID do processo Python com base no nome do script
@@ -11,11 +11,11 @@ pid=$(pgrep -f "$nome_script")
 if [ -z "$pid" ]; then
     echo "O processo $nome_script não está em execução."
     echo "Inicializando Sistema de Backup..."
-    nohup python /content/tools/jdownloader/jdownload_to_rclone.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
+    nohup python /content/tools/jdownloader/jdownload_to_cyclone.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
 else
     # Processo em execução
     echo "Processo $nome_script (PID: $pid) já está em execução."
     kill "$pid"
-    nohup python /content/tools/jdownloader/jdownload_to_rclone.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
+    nohup python /content/tools/jdownloader/jdownload_to_cyclone.py -o "$SAVE_FOLDER" > /content/logs/JDMove_Downloads.log 2>&1 &
     echo "Sistema de Backup Reiniciado."
 fi
