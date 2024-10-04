@@ -79,7 +79,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
                                     f"--drive-service-account-file={service_account_file}", 
                                     '--retries', 
                                     '100', 
-                                    "--log-file=/content/logs/rclone_jdownloader.log"])
+                                    "--log-file=/content/logs/cloner_jdownloader.log"])
 
                     # Após a cópia, excluir o arquivo da origem
                     os.remove(caminho_origem)
