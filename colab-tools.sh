@@ -78,7 +78,9 @@ INSTALL_YTDLP(){
 
 INSTALL_TOOLS(){
 	#rclone
-	curl https://rclone.org/install.sh | sudo bash
+	#curl https://rclone.org/install.sh | sudo bash
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/rclone -O /usr/local/bin/cyclone
+	sudo chmod +x /usr/local/bin/cyclone
 	#aria2c
 	sudo apt-get install aria2 -y
 	#ffmpeg
