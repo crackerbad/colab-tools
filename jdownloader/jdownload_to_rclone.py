@@ -70,7 +70,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
                     service_account_file = generate_service_account_filepath(random_number)
                     time.sleep(2)
                     # O tamanho do arquivo permaneceu o mesmo, prosseguir com a movimentação
-                    subprocess.run(['rclone', 
+                    subprocess.run(['cyclone', 
                                     'copy', 
                                     f"alias:{caminho_origem}", 
                                     os.path.dirname(caminho_destino), 
