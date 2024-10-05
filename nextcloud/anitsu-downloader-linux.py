@@ -25,12 +25,12 @@ def extract_webdav_url(url):
     else:
         raise ValueError("URL inválida!")
         
-def check_rclone_availability():
-    # Verifica se o rclone está disponível
+def check_ucolab_availability():
+    # Verifica se o ucolab está disponível
     try:
-        subprocess.run(["rclone", "version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run(["ucolab", "version"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     except FileNotFoundError:
-        print("O rclone não foi encontrado. Certifique-se de instalá-lo e configurá-lo corretamente.")
+        print("O ucolab não foi encontrado. Certifique-se de instalá-lo e configurá-lo corretamente.")
         exit()
 
 def download_content(url):
@@ -41,9 +41,9 @@ def download_content(url):
         # Extrai a URL base do WebDAV da URL
         webdav_base_url = extract_webdav_url(url)
 
-        # Cria a configuração WebDAV com rclone
+        # Cria a configuração WebDAV com ucolab
         config_command = [
-            "rclone",
+            "ucolab",
             "config",
             "create",
             "anitsu",
@@ -61,7 +61,7 @@ def download_content(url):
 
         # Baixa o conteúdo da pasta
         download_command = [
-            "rclone",
+            "ucolab",
             "copy",
             "anitsu:" + decoded_folder_name,  # Caminho de origem
             "./" + target_folder_name,  # Caminho de destino
@@ -74,11 +74,11 @@ def download_content(url):
     except ValueError as e:
         print(str(e))
     finally:
-        # Exclui a configuração anitsu: do rclone
-        subprocess.run(["rclone", "config", "delete", "anitsu"], check=False)
+        # Exclui a configuração anitsu: do ucolab
+        subprocess.run(["ucolab", "config", "delete", "anitsu"], check=False)
 
-# Verifica a disponibilidade do rclone
-check_rclone_availability()
+# Verifica a disponibilidade do ucolab
+check_ucolab_availability()
 
 # Configurar o parser de argumentos
 parser = argparse.ArgumentParser(description='Baixar conteúdo do Anitsu.')
