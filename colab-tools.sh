@@ -77,10 +77,11 @@ INSTALL_YTDLP(){
 }
 
 INSTALL_TOOLS(){
-	#rclone
-	#curl https://rclone.org/install.sh | sudo bash
-	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/rclone -O /usr/local/bin/cloner
-	sudo chmod +x /usr/local/bin/cloner
+	#(R)Clone
+	wget https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/gclone -O /usr/bin/ucolab
+	#alias rclone='/usr/bin/ucolab'
+	sudo chmod +x /usr/bin/ucolab
+	#------------
 	#aria2c
 	sudo apt-get install aria2 -y
 	#ffmpeg
@@ -106,7 +107,7 @@ INSTALL_TOOLS(){
 	cd jdownloader
 	pip install psutil
 	wget "https://github.com/crackerbad/colab-tools/raw/refs/heads/main/jdownloader/jdownloader_installer.py"
-	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/jdownload_to_cyclone.py"
+	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/jdownload_to_ucolab.py"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/restart_backup.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/jdownloader/terminate_backup.sh"
 	cd /content/
