@@ -70,7 +70,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
                     service_account_file = generate_service_account_filepath(random_number)
                     time.sleep(2)
                     # O tamanho do arquivo permaneceu o mesmo, prosseguir com a movimentação
-                    subprocess.run(['cloner', 
+                    subprocess.run(['ucolab', 
                                     'copy', 
                                     f"alias:{caminho_origem}", 
                                     os.path.dirname(caminho_destino), 
@@ -79,7 +79,7 @@ def mover_arquivos(pasta_origem, pasta_destino):
                                     f"--drive-service-account-file={service_account_file}", 
                                     '--retries', 
                                     '100', 
-                                    "--log-file=/content/logs/cloner_jdownloader.log"])
+                                    "--log-file=/content/logs/ucolab_jdownloader.log"])
 
                     # Após a cópia, excluir o arquivo da origem
                     os.remove(caminho_origem)
