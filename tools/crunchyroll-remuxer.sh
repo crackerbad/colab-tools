@@ -6,13 +6,27 @@ do
         o) output=${OPTARG};;
     esac
 done
+
 cd "/content/tools/multi-downloader-nx-ubuntu64-gui/videos"
+
 for f in *.mkv; do
-    #corrige e padroniza propriedades
-    mkvpropedit "$f" --edit track:s2 --set flag-forced=1 --edit track:s2 --set name="Brazilian Portuguese Forced"
-    #salva na pasta de saida
-    mkvmerge -o "$output/CR/$f" "$f" --track-order 0:0,0:2,0:1,0:4,0:3     
+    # Verifica o idioma da primeira faixa de audio
+    lang=$(ffprobe -v error -select_streams a:0 -show_entries stream_tags=language -of csv=p=0 "$f")
+
+    if [ "$lang" == "jpn" ]; then
+        echo "Audio primario jápones prosseguindo com alterações."
+        # Se o idioma for Português, corrige e padroniza as propriedades
+        mkvpropedit "$f" --edit track:s2 --set flag-forced=1 --edit track:s2 --set name="Brazilian Portuguese Forced"
+        mkvmerge -o "$output/CR/$f" "$f" --track-order 0:0,0:2,0:1,0:4,0:3
+    else
+        # Se o idioma não for Português
+        echo "Audio primario português prosseguindo com alterações."
+        mkvpropedit "$f" --edit track:s1 --set flag-forced=1 --edit track:s1 --set name="Brazilian Portuguese Forced"
+        mkvmerge -o "$output/CR/$f" "$f"
+    fi
+    # Remove o arquivo original
     rm "$f"
 done
+
 cd "/content/"
 echo "Remuxing Finalizado."
