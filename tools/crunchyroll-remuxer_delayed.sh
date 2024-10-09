@@ -14,6 +14,7 @@ done
 cd "/content/tools/multi-downloader-nx-ubuntu64-gui/videos"
 
 for f in *.mkv; do
+    new_f=$(echo "$f" | tr ' ' '.')
     # Verifica o idioma da primeira faixa de audio
     lang=$(ffprobe -v error -select_streams a:0 -show_entries stream_tags=language -of csv=p=0 "$f")
 
@@ -21,12 +22,12 @@ for f in *.mkv; do
         echo "Audio primario jápones prosseguindo com alterações."
         # Se o idioma for Português, corrige e padroniza as propriedades
         mkvpropedit "$f" --edit track:s2 --set flag-forced=1 --edit track:s2 --set name="Brazilian Portuguese Forced"
-        mkvmerge -o "$output/CR/$f"  --sync $audiotrack:$delaytime "$f" --track-order 0:0,0:2,0:1,0:4,0:3
+        mkvmerge -o "$output/CR/$new_f" --sync $audiotrack:$delaytime "$f" --track-order 0:0,0:2,0:1,0:4,0:3
     else
         # Se o idioma não for Português
         echo "Audio primario português prosseguindo com alterações."
         mkvpropedit "$f" --edit track:s1 --set flag-forced=1 --edit track:s1 --set name="Brazilian Portuguese Forced"
-        mkvmerge -o "$output/CR/$f"  --sync $audiotrack:$delaytime "$f"
+        mkvmerge -o "$output/CR/$new_f" --sync $audiotrack:$delaytime "$f"
     fi
     # Remove o arquivo original
     rm "$f"
