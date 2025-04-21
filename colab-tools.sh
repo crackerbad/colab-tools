@@ -28,6 +28,7 @@ INSTALL_CRDOWNLOADER(){
 	sudo chmod +x /usr/local/bin/mp4decrypt
 	sudo wget "https://github.com/shaka-project/shaka-packager/releases/download/v3.4.2/packager-linux-x64" -O /usr/local/bin/shaka-packager
 	sudo chmod +x /usr/local/bin/shaka-packager
+	sudo ln -s /usr/local/bin/shaka-packager /usr/bin/packager
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
