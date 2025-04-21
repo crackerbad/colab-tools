@@ -26,6 +26,8 @@ INSTALL_CRDOWNLOADER(){
 	#sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.77156914.js
 	sudo wget "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/mp4decrypt" -O /usr/local/bin/mp4decrypt
 	sudo chmod +x /usr/local/bin/mp4decrypt
+	sudo wget "https://github.com/shaka-project/shaka-packager/releases/download/v3.4.2/packager-linux-x64" -O /usr/local/bin/shaka-packager
+	sudo chmod +x /usr/local/bin/shaka-packager
 	nohup ./aniDL > /content/logs/aniDL.log 2>&1 &
 	cd "/content/"
 }
