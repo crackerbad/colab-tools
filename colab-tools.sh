@@ -10,20 +10,48 @@ rm -r /content/sample_data
 sudo apt-get -y install busybox
 pip install ipywidgets
 
+DOWNLOAD_LATEST_REPO() {
+    REPO="$1"
+    FILTER="$2"
+    EXT="$3"
+
+    echo "🔍 Buscando última release de $REPO..."
+
+    URL=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" \
+    | grep "browser_download_url" \
+    | grep "$FILTER" \
+    | grep "$EXT" \
+    | cut -d '"' -f 4)
+
+    if [ -n "$URL" ]; then
+        FILE=$(basename "$URL")
+        echo "📥 Baixando: $FILE"
+        wget -q --show-progress "$URL" -O "$FILE"
+
+        echo "📦 Extraindo com 7z..."
+        7z x "$FILE"
+
+        echo "🧹 Removendo arquivo compactado..."
+        rm "$FILE"
+
+        echo "✅ Tudo certo!"
+    else
+        echo "❌ Asset não encontrado com filtro '$FILTER' e extensão '$EXT'"
+    fi
+}
+
 INSTALL_CRDOWNLOADER(){
 	cd /content/tools
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer.sh"
 	wget "https://raw.githubusercontent.com/crackerbad/colab-tools/main/tools/crunchyroll-remuxer_delayed.sh"
 	wget "https://github.com/crackerbad/colab-tools/raw/main/tools/crunchyroll_start.sh"
-	wget "https://github.com/anidl/multi-downloader-nx/releases/download/v5.3.7/multi-downloader-nx-linux-gui.7z" -O "multi-downloader-nx-linux-gui.7z"
-	7z x "multi-downloader-nx-linux-gui.7z" && rm multi-downloader-nx-linux-gui.7z
+	DOWNLOAD_LATEST_REPO "anidl/multi-downloader-nx" "linux-gui" ".7z"
 	mv "multi-downloader-nx-linux-x64-gui" "multi-downloader-nx-ubuntu64-gui"
 	cd "multi-downloader-nx-ubuntu64-gui"
 	rm -r config
 	rm -r widevine
 	wget -O config.zip "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/cr_config.zip"
 	unzip config.zip && rm config.zip
-	#sed -i 's/ws:\/\//wss:\/\//g' /content/tools/multi-downloader-nx-ubuntu64-gui/gui/server/build/static/js/main.77156914.js
 	sudo wget "https://drive.kingvegeta.workers.dev/1:/Files/colab-tools/tools/mp4decrypt" -O /usr/local/bin/mp4decrypt
 	sudo chmod +x /usr/local/bin/mp4decrypt
 	sudo wget "https://github.com/shaka-project/shaka-packager/releases/download/v3.4.2/packager-linux-x64" -O /usr/local/bin/shaka-packager
